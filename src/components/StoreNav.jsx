@@ -8,6 +8,7 @@ export default function StoreNav({ allSections, selected, onClick }) {
           <Link
             to={`/${section}`}
             id={section}
+            key={section}
             className={section === selected ? "selected" : null}
             onClick={(e) => onClick(e)}
           >

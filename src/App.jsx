@@ -6,6 +6,20 @@ import { useState } from "react";
 export default function App() {
   const [section, setSection] = useState("");
 
+  const [items, setItems] = useState(modify(inventory));
+
+  function modify(original) {
+    let modified = {};
+    for (let key of Object.keys(original)) {
+      modified[key] = original[key].map((item) => {
+        item["id"] = crypto.randomUUID();
+        item["count"] = 0;
+        return item;
+      });
+    }
+    return modified;
+  }
+
   function select(e) {
     setSection(e.target.id);
   }
@@ -17,7 +31,7 @@ export default function App() {
         selected={section}
         onClick={select}
       />
-      <Outlet context={[section]} />
+      <Outlet context={[section, items]} />
     </>
   );
 }
