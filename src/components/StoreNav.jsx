@@ -1,15 +1,18 @@
+import { Link } from "react-router";
+
 export default function StoreNav({ allSections, selected, onClick }) {
   return (
     <div className="store-nav">
       {allSections.map((section) => {
         return (
-          <button
+          <Link
+            to={`/${section}`}
             id={section}
-            className={section === selected && "selected"}
+            className={section === selected ? "selected" : null}
             onClick={(e) => onClick(e)}
           >
             {section}
-          </button>
+          </Link>
         );
       })}
     </div>

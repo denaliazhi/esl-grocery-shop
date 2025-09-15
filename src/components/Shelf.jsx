@@ -1,4 +1,9 @@
-export default function Shelf({ display }) {
+import { useOutletContext } from "react-router";
+import inventory from "../data/inventory.js";
+
+export default function Shelf() {
+  const section = useOutletContext();
+  const display = inventory[section];
   return (
     <div className="item-shelf">
       {/* TO DO: Add key to each div */}
