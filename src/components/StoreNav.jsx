@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export default function StoreNav({ allSections, selected, onClick }) {
+export default function StoreNav({ allSections, selected, handleClick }) {
   return (
     <div className="store-nav">
       {allSections.map((section) => {
@@ -10,7 +10,7 @@ export default function StoreNav({ allSections, selected, onClick }) {
             id={section}
             key={section}
             className={section === selected ? "selected" : null}
-            onClick={(e) => onClick(e)}
+            onClick={(e) => handleClick(e)}
           >
             {section}
           </Link>

@@ -4,8 +4,9 @@ import { Outlet } from "react-router";
 import { useState } from "react";
 
 export default function App() {
+  // Tracks active section in grocery store
   const [section, setSection] = useState("");
-
+  // Tracks all items and their purchase status
   const [items, setItems] = useState(modify(inventory));
 
   function modify(original) {
@@ -24,14 +25,28 @@ export default function App() {
     setSection(e.target.id);
   }
 
+  function changeCount(itemId, num) {
+    const index = items[section].findIndex((item) => item.id === itemId);
+    const updatedItems = items[section].map((item, i) => {
+      if (i === index) {
+        return { ...item, count: item.count + num };
+      }
+      return item;
+    });
+    setItems({
+      ...items,
+      [section]: updatedItems,
+    });
+  }
+
   return (
     <>
       <StoreNav
         allSections={Object.keys(inventory)}
         selected={section}
-        onClick={select}
+        handleClick={select}
       />
-      <Outlet context={[section, items]} />
+      <Outlet context={[section, items, changeCount]} />
     </>
   );
 }
