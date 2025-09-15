@@ -1,23 +1,14 @@
-import { useState } from "react";
-import Sample from "./components/Sample";
-import "./App.css";
+// import Viewer from "./components/Viewer";
+import Shelf from "./components/Shelf";
+import inventory from "./data/inventory.js";
+// import { useState } from "react";
 
-function App() {
-  const [heading, setHeading] = useState("Sprinkles");
+export default function App() {
   return (
     <>
-      <h1>{heading}</h1>
-      <button
-        onClick={() => {
-          setHeading("Chocolate");
-        }}
-      >
-        Change
-      </button>
-
-      <Sample></Sample>
+      {/* <header>Header</header> */}
+      <Shelf display={inventory.produce} />
+      {/* <footer>Footer</footer> */}
     </>
   );
 }
-
-export default App;
