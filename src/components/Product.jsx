@@ -1,7 +1,7 @@
 /**
  * This component renders the details for an item.
  */
-
+import AddItem from "./AddItem";
 import NumberPicker from "./NumberPicker";
 import RemoveItem from "./RemoveItem";
 
@@ -15,14 +15,7 @@ export default function Product({ item, handleClick }) {
           ${item.unitPrice.toFixed(2)} / {item.displayUnit}
         </p>
         {item.count === 0 ? (
-          <button
-            className="add-cart-btn"
-            onClick={(e) => {
-              handleClick(e.target.parentNode.id, 1);
-            }}
-          >
-            Add to cart
-          </button>
+          <AddItem handleClick={handleClick} />
         ) : (
           <>
             <NumberPicker value={item.count} handleClick={handleClick} />
