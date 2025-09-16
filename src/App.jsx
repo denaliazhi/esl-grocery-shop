@@ -1,5 +1,6 @@
 import inventory from "./data/inventory.js";
 import StoreNav from "./components/StoreNav.jsx";
+import Cart from "./components/Cart.jsx";
 import { Outlet } from "react-router";
 import { useState } from "react";
 
@@ -47,6 +48,7 @@ export default function App() {
         handleClick={select}
       />
       <Outlet context={[section, items, changeCount]} />
+      <Cart contents={items} />
     </>
   );
 }

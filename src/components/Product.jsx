@@ -11,6 +11,7 @@ export default function Product({ item, handleClick }) {
         </p>
         {item.count === 0 ? (
           <button
+            className="add-cart-btn"
             onClick={(e) => {
               handleClick(e.target.parentNode.id, 1);
             }}

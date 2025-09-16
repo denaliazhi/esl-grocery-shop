@@ -52,7 +52,7 @@ const inventory = {
     },
     {
       name: "cookies",
-      unitPrice: 5.99,
+      unitPrice: 6.99,
       speechUnit: "pack",
       displayUnit: "pack (16-ct)",
     },
