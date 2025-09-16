@@ -1,14 +1,14 @@
 /**
- * This component renders the details for an item.
+ * This component renders the details for an item in shelf view.
  */
 import AddItem from "./AddItem";
 import NumberPicker from "./NumberPicker";
 import RemoveItem from "./RemoveItem";
 
-export default function Product({ item, handleClick }) {
+export default function ShelfItem({ item, handleClick }) {
   return (
     <>
-      <div className="product" id={item.id}>
+      <div className="shelf-item" id={item.id}>
         <img src={`/${item.name}.png`} alt="" width="100" />
         <p>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
         <p>

@@ -4,16 +4,16 @@
  */
 
 import { useOutletContext } from "react-router";
-import Product from "./Product";
+import ShelfItem from "./ShelfItem";
 
 export default function Shelf() {
   const [section, items, setCount] = useOutletContext();
   return (
     <>
       {section ? (
-        <div className="product-shelf">
+        <div className="shelf">
           {items[section].map((item) => (
-            <Product item={item} key={item.id} handleClick={setCount} />
+            <ShelfItem item={item} key={item.id} handleClick={setCount} />
           ))}
         </div>
       ) : null}
