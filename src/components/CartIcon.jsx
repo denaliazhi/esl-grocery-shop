@@ -4,17 +4,11 @@
  */
 import { Link } from "react-router";
 
-export default function Cart({ contents }) {
-  let totalItems = 0;
-  for (let section of Object.keys(contents)) {
-    for (let item of contents[section]) {
-      totalItems = totalItems + item.count;
-    }
-  }
+export default function CartIcon({ count }) {
   return (
     <>
       <Link to="/cart" className="cart-btn">
-        {totalItems}
+        {count}
       </Link>
     </>
   );

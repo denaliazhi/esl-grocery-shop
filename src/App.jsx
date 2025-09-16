@@ -11,10 +11,11 @@ import { Outlet } from "react-router";
 import { useState } from "react";
 
 export default function App() {
-  // Track active section in grocery store
-  const [currentSection, setCurrentSection] = useState("");
-  // Track all items and their purchase status
+  const [activeSection, setActiveSection] = useState("");
+  // Track all store items and their purchase status
   const [items, setItems] = useState(modify(inventory));
+  // Track total items in cart
+  const [cartCount, setCartCount] = useState(0);
 
   function modify(original) {
     let modified = {};
@@ -29,10 +30,10 @@ export default function App() {
   }
 
   function select(e) {
-    setCurrentSection(e.target.id);
+    setActiveSection(e.target.id);
   }
 
-  function setCount(e, num) {
+  function updateCount(e, num) {
     const product = e.target.closest(".shelf-item");
     const section = product.dataset.section;
     const index = items[section].findIndex((item) => item.id === product.id);
@@ -46,17 +47,18 @@ export default function App() {
       ...items,
       [section]: updatedItems,
     });
+    setCartCount(cartCount + num);
   }
 
   return (
     <>
       <StoreNav
         allSections={Object.keys(inventory)}
-        selected={currentSection}
+        selected={activeSection}
         handleClick={select}
       />
-      <Outlet context={[currentSection, items, setCount]} />
-      <CartIcon contents={items} handleClick={setCount} />
+      <Outlet context={[activeSection, items, updateCount, cartCount]} />
+      <CartIcon count={cartCount} />
     </>
   );
 }

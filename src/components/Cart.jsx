@@ -6,7 +6,7 @@ import { Link, useOutletContext } from "react-router";
 import ShelfItem from "./ShelfItem";
 
 export default function Cart() {
-  const [section, items, setCount] = useOutletContext();
+  const [section, items, updateCount, cartCount] = useOutletContext();
 
   let cart = [];
   function getCartItems() {
@@ -16,19 +16,16 @@ export default function Cart() {
   }
   getCartItems();
 
-  let num = cart.length;
-
   return (
     <>
-      <div className="cart-details">
+      <div className="cart">
         <div className="cart-header">
           <Link to={`/${section}`}>Back to store</Link>
           <div>
             <h1>Cart</h1>
-            {/* num is wrong-- need to copy logic from cart icon */}
-            <p>{`(${num} items)`}</p>
+            <p>{`(${cartCount} items)`}</p>
           </div>
-          {num === 0 ? (
+          {cartCount === 0 ? (
             <button className="disabled">Checkout</button>
           ) : (
             // TO DO: change button into link and redirect
@@ -36,9 +33,9 @@ export default function Cart() {
           )}
         </div>
 
-        {num > 0 ? (
+        {cartCount > 0 ? (
           cart.map((item) => (
-            <ShelfItem item={item} key={item.id} handleClick={setCount} />
+            <ShelfItem item={item} key={item.id} handleClick={updateCount} />
           ))
         ) : (
           // TO DO: add picture of empty cart
