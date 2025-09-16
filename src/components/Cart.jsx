@@ -3,15 +3,14 @@
  * allows the user to modify / remove items before checkout.
  */
 import { Link, useOutletContext } from "react-router";
-import ShelfItem from "./ShelfItem";
-
+import CartItem from "./CartItem";
 export default function Cart() {
-  const [section, items, updateCount, cartCount] = useOutletContext();
+  const [section, items, updateCount, cart] = useOutletContext();
 
-  let cart = [];
+  let selectedItems = [];
   function getCartItems() {
     for (let key of Object.keys(items)) {
-      cart.push(...items[key].filter((item) => item.count > 0));
+      selectedItems.push(...items[key].filter((item) => item.count > 0));
     }
   }
   getCartItems();
@@ -23,9 +22,9 @@ export default function Cart() {
           <Link to={`/${section}`}>Back to store</Link>
           <div>
             <h1>Cart</h1>
-            <p>{`(${cartCount} items)`}</p>
+            <p>{`(${cart.count} items)`}</p>
           </div>
-          {cartCount === 0 ? (
+          {cart.count === 0 ? (
             <button className="disabled">Checkout</button>
           ) : (
             // TO DO: change button into link and redirect
@@ -33,10 +32,15 @@ export default function Cart() {
           )}
         </div>
 
-        {cartCount > 0 ? (
-          cart.map((item) => (
-            <ShelfItem item={item} key={item.id} handleClick={updateCount} />
-          ))
+        {cart.count > 0 ? (
+          <>
+            {selectedItems.map((item) => (
+              <CartItem item={item} key={item.id} handleClick={updateCount} />
+            ))}
+            <hr />
+            <p>Total</p>
+            <p>{cart.totalCost.toFixed(2)}</p>
+          </>
         ) : (
           // TO DO: add picture of empty cart
           <p>Your cart is empty.</p>

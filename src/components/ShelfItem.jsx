@@ -8,7 +8,11 @@ import RemoveItem from "./RemoveItem";
 export default function ShelfItem({ item, handleClick }) {
   return (
     <>
-      <div className="shelf-item" id={item.id} data-section={item.section}>
+      <div
+        className="product shelf-item"
+        id={item.id}
+        data-section={item.section}
+      >
         <img src={`/${item.name}.png`} alt="" width="100" />
         <p>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
         <p>

@@ -4,11 +4,11 @@
  */
 import { Link } from "react-router";
 
-export default function CartIcon({ count }) {
+export default function CartIcon({ data }) {
   return (
     <>
       <Link to="/cart" className="cart-btn">
-        {count}
+        {data.count}
       </Link>
     </>
   );

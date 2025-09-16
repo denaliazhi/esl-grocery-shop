@@ -14,8 +14,11 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("");
   // Track all store items and their purchase status
   const [items, setItems] = useState(modify(inventory));
-  // Track total items in cart
-  const [cartCount, setCartCount] = useState(0);
+  // Track total item count and cost of items in cart
+  const [cart, setCart] = useState({
+    count: 0,
+    totalCost: 0,
+  });
 
   function modify(original) {
     let modified = {};
@@ -33,12 +36,18 @@ export default function App() {
     setActiveSection(e.target.id);
   }
 
+  // TO DO: think this breaks SOLID
+  // Update item's count, cart's total count, and cart's total cost
   function updateCount(e, num) {
-    const product = e.target.closest(".shelf-item");
+    const product = e.target.closest(".product");
     const section = product.dataset.section;
     const index = items[section].findIndex((item) => item.id === product.id);
     const updatedItems = items[section].map((item, i) => {
       if (i === index) {
+        setCart({
+          count: cart.count + num,
+          totalCost: cart.totalCost + num * item.unitPrice,
+        });
         return { ...item, count: item.count + num };
       }
       return item;
@@ -47,7 +56,6 @@ export default function App() {
       ...items,
       [section]: updatedItems,
     });
-    setCartCount(cartCount + num);
   }
 
   return (
@@ -57,8 +65,8 @@ export default function App() {
         selected={activeSection}
         handleClick={select}
       />
-      <Outlet context={[activeSection, items, updateCount, cartCount]} />
-      <CartIcon count={cartCount} />
+      <Outlet context={[activeSection, items, updateCount, cart]} />
+      <CartIcon data={cart} />
     </>
   );
 }
