@@ -1,4 +1,9 @@
+/**
+ * This component renders the details for an item.
+ */
+
 import NumberPicker from "./NumberPicker";
+import RemoveItem from "./RemoveItem";
 
 export default function Product({ item, handleClick }) {
   return (
@@ -19,7 +24,10 @@ export default function Product({ item, handleClick }) {
             Add to cart
           </button>
         ) : (
-          <NumberPicker value={item.count} handleClick={handleClick} />
+          <>
+            <NumberPicker value={item.count} handleClick={handleClick} />
+            <RemoveItem value={item.count} handleClick={handleClick} />
+          </>
         )}
       </div>
     </>
