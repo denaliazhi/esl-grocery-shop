@@ -12,7 +12,7 @@ export default function StoreNav({ allSections, selected, handleClick }) {
             className={section === selected ? "selected" : null}
             onClick={(e) => handleClick(e)}
           >
-            {section}
+            {section.charAt(0).toUpperCase() + section.slice(1)}
           </Link>
         );
       })}
