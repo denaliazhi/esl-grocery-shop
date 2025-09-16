@@ -1,3 +1,8 @@
+/**
+ * This component allows the user to increase/decrease
+ * the amount of an item that they've added to their cart.
+ */
+
 export default function NumberPicker({ value, handleClick }) {
   return (
     <div className="number-picker">

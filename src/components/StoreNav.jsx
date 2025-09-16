@@ -1,3 +1,8 @@
+/**
+ * This component allows the user to move between sections
+ * of the grocery store.
+ */
+
 import { Link } from "react-router";
 
 export default function StoreNav({ allSections, selected, handleClick }) {

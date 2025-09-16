@@ -1,3 +1,8 @@
+/**
+ * This file contains data for all grocery items,
+ * grouped by the section of the store to which they belong.
+ */
+
 const inventory = {
   produce: [
     {

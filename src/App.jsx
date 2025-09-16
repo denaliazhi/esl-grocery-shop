@@ -1,13 +1,19 @@
+/**
+ * This component manages the overall shopping experience.
+ * It tracks what section of the store the user is in
+ * and the items that they've put in their cart.
+ */
+
 import inventory from "./data/inventory.js";
 import StoreNav from "./components/StoreNav.jsx";
-import Cart from "./components/Cart.jsx";
+import CartIcon from "./components/CartIcon.jsx";
 import { Outlet } from "react-router";
 import { useState } from "react";
 
 export default function App() {
-  // Tracks active section in grocery store
+  // Track active section in grocery store
   const [section, setSection] = useState("");
-  // Tracks all items and their purchase status
+  // Track all items and their purchase status
   const [items, setItems] = useState(modify(inventory));
 
   function modify(original) {
@@ -26,7 +32,7 @@ export default function App() {
     setSection(e.target.id);
   }
 
-  function changeCount(itemId, num) {
+  function setCount(itemId, num) {
     const index = items[section].findIndex((item) => item.id === itemId);
     const updatedItems = items[section].map((item, i) => {
       if (i === index) {
@@ -47,8 +53,8 @@ export default function App() {
         selected={section}
         handleClick={select}
       />
-      <Outlet context={[section, items, changeCount]} />
-      <Cart contents={items} />
+      <Outlet context={[section, items, setCount]} />
+      <CartIcon contents={items} handleClick={setCount} />
     </>
   );
 }
