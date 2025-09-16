@@ -13,7 +13,7 @@ export default function Shelf() {
       {section ? (
         <div className="shelf">
           {items[section].map((item) => (
-            <ShelfItem item={item} key={item.id} handleClick={setCount} />
+            <ShelfItem key={item.id} item={item} handleClick={setCount} />
           ))}
         </div>
       ) : null}

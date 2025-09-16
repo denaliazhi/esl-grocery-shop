@@ -5,10 +5,7 @@
 
 export default function RemoveItem({ value, handleClick }) {
   return (
-    <button
-      className="remove-btn"
-      onClick={(e) => handleClick(e.target.parentNode.id, -value)}
-    >
+    <button className="remove-btn" onClick={(e) => handleClick(e, -value)}>
       <span></span> Remove
     </button>
   );

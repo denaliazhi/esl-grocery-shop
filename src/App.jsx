@@ -12,7 +12,7 @@ import { useState } from "react";
 
 export default function App() {
   // Track active section in grocery store
-  const [section, setSection] = useState("");
+  const [currentSection, setCurrentSection] = useState("");
   // Track all items and their purchase status
   const [items, setItems] = useState(modify(inventory));
 
@@ -29,11 +29,13 @@ export default function App() {
   }
 
   function select(e) {
-    setSection(e.target.id);
+    setCurrentSection(e.target.id);
   }
 
-  function setCount(itemId, num) {
-    const index = items[section].findIndex((item) => item.id === itemId);
+  function setCount(e, num) {
+    const product = e.target.closest(".shelf-item");
+    const section = product.dataset.section;
+    const index = items[section].findIndex((item) => item.id === product.id);
     const updatedItems = items[section].map((item, i) => {
       if (i === index) {
         return { ...item, count: item.count + num };
@@ -50,10 +52,10 @@ export default function App() {
     <>
       <StoreNav
         allSections={Object.keys(inventory)}
-        selected={section}
+        selected={currentSection}
         handleClick={select}
       />
-      <Outlet context={[section, items, setCount]} />
+      <Outlet context={[currentSection, items, setCount]} />
       <CartIcon contents={items} handleClick={setCount} />
     </>
   );
