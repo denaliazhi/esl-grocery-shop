@@ -1,11 +1,12 @@
-import App from "./App";
+import Lesson from "./Lesson.jsx";
 import Cart from "./components/Cart";
 import Shelf from "./components/Shelf";
+import Checkout from "./components/Checkout";
 
 const routes = [
   {
     path: "/",
-    element: <App />,
+    element: <Lesson />,
     children: [
       {
         path: "/:section",
@@ -14,6 +15,10 @@ const routes = [
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
     ],
   },

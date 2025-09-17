@@ -4,13 +4,13 @@
  * and the items that they've put in their cart.
  */
 
-import inventory from "./data/inventory.js";
-import StoreNav from "./components/StoreNav.jsx";
-import CartIcon from "./components/CartIcon.jsx";
+import inventory from "../data/inventory.js";
+import StoreNav from "./StoreNav.jsx";
+import CartIcon from "./CartIcon.jsx";
 import { Outlet } from "react-router";
 import { useState } from "react";
 
-export default function App() {
+export default function InStoreMode() {
   const [activeSection, setActiveSection] = useState("");
   // Track all store items and their purchase status
   const [items, setItems] = useState(modify(inventory));
@@ -59,7 +59,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <div class="virtual-store">
       <StoreNav
         allSections={Object.keys(inventory)}
         selected={activeSection}
@@ -67,6 +67,6 @@ export default function App() {
       />
       <Outlet context={[activeSection, items, updateCount, cart]} />
       <CartIcon data={cart} />
-    </>
+    </div>
   );
 }
