@@ -1,4 +1,4 @@
-import Lesson from "./Lesson.jsx";
+import App from "./App";
 import Cart from "./components/Cart";
 import Shelf from "./components/Shelf";
 import Checkout from "./components/Checkout";
@@ -6,7 +6,7 @@ import Checkout from "./components/Checkout";
 const routes = [
   {
     path: "/",
-    element: <Lesson />,
+    element: <App />,
     children: [
       {
         path: "/:section",

@@ -4,15 +4,20 @@
 import AddItem from "./AddItem";
 import NumberPicker from "./NumberPicker";
 import RemoveItem from "./RemoveItem";
-import { Capitalize } from "../utils";
+import { Capitalize, IsPlural } from "../utils";
 
-export default function ShelfItem({ item, handleClick }) {
+export default function ShelfItem({ item, handleClick, read }) {
+  function handleHover() {
+    let costsOrCost = IsPlural(item.name) ? "cost" : "costs";
+    read(`The ${item.name} ${costsOrCost} $${item.unitPrice}.`);
+  }
   return (
     <>
       <div
         className="product shelf-item"
         id={item.id}
         data-section={item.section}
+        onMouseOver={handleHover}
       >
         <img src={`/${item.name.replace(" ", "-")}.png`} alt="" width="100" />
         <p>{Capitalize(item.name)}</p>
@@ -20,11 +25,19 @@ export default function ShelfItem({ item, handleClick }) {
           ${item.unitPrice.toFixed(2)} / {item.displayUnit}
         </p>
         {item.count === 0 ? (
-          <AddItem handleClick={handleClick} />
+          <AddItem handleClick={handleClick} read={read} />
         ) : (
           <>
-            <NumberPicker value={item.count} handleClick={handleClick} />
-            <RemoveItem value={item.count} handleClick={handleClick} />
+            <NumberPicker
+              value={item.count}
+              handleClick={handleClick}
+              read={read}
+            />
+            <RemoveItem
+              value={item.count}
+              handleClick={handleClick}
+              read={read}
+            />
           </>
         )}
       </div>

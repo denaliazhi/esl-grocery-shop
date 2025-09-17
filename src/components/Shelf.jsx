@@ -7,13 +7,18 @@ import { useOutletContext } from "react-router";
 import ShelfItem from "./ShelfItem";
 
 export default function Shelf() {
-  const [section, items, updateCount] = useOutletContext();
+  const [section, items, updateCount, , setLine] = useOutletContext();
   return (
     <>
       {section ? (
         <div className="shelf">
           {items[section].map((item) => (
-            <ShelfItem key={item.id} item={item} handleClick={updateCount} />
+            <ShelfItem
+              key={item.id}
+              item={item}
+              handleClick={updateCount}
+              read={setLine}
+            />
           ))}
         </div>
       ) : null}

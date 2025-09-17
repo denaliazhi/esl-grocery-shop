@@ -1,21 +1,12 @@
-import { useState } from "react";
+/**
+ * This component displays narrative text.
+ */
 
-export default function NarrationBar({ read, mode, handleClick }) {
-  const [line, setLine] = useState(0);
-
-  function next() {
-    if (line !== read.length - 1) {
-      setLine(line + 1);
-    } else {
-      setLine(0);
-      handleClick();
-    }
-  }
-
+export default function NarrationBar({ text, showNext, handleClick }) {
   return (
     <div className="narration-bar">
-      <p>{read[line]}</p>
-      {mode === "tutorial" && <button onClick={next}>Next</button>}
+      <p>{text}</p>
+      {showNext && <button onClick={handleClick}>Next</button>}
     </div>
   );
 }

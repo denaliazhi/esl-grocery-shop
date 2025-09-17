@@ -4,4 +4,9 @@ function Capitalize(name) {
   return words.join(" ");
 }
 
-export { Capitalize };
+function IsPlural(word) {
+  let lastChar = word[word.length - 1];
+  return lastChar === "s";
+}
+
+export { Capitalize, IsPlural };

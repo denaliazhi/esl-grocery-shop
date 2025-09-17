@@ -1,24 +1,26 @@
 /**
- * This component manages the overall shopping experience.
- * It tracks what section of the store the user is in
- * and the items that they've put in their cart.
+ * This component simulates the process
+ * of online grocery shopping.
  */
 
+import { main, sectionDetails } from "../data/lesson-content";
 import inventory from "../data/inventory.js";
 import StoreNav from "./StoreNav.jsx";
 import CartIcon from "./CartIcon.jsx";
+import NarrationBar from "./NarrationBar";
 import { Outlet } from "react-router";
 import { useState } from "react";
 
-export default function InStoreMode() {
+export default function ShoppingMode({ scene, nextScene }) {
   const [activeSection, setActiveSection] = useState("");
-  // Track all store items and their purchase status
   const [items, setItems] = useState(modify(inventory));
-  // Track total item count and cost of items in cart
   const [cart, setCart] = useState({
     count: 0,
     totalCost: 0,
   });
+
+  const [background, setBackground] = useState(main[scene].background);
+  const [line, setLine] = useState(main[scene].script[0]);
 
   function modify(original) {
     let modified = {};
@@ -33,7 +35,10 @@ export default function InStoreMode() {
   }
 
   function select(e) {
-    setActiveSection(e.target.id);
+    let selected = e.target.id;
+    setActiveSection(selected);
+    setBackground(selected.replace("_", "-"));
+    setLine(sectionDetails[selected]);
   }
 
   // TO DO: think this breaks SOLID
@@ -59,14 +64,20 @@ export default function InStoreMode() {
   }
 
   return (
-    <div className="virtual-store">
-      <StoreNav
-        allSections={Object.keys(inventory)}
-        selected={activeSection}
-        handleClick={select}
-      />
-      <Outlet context={[activeSection, items, updateCount, cart]} />
-      <CartIcon data={cart} />
+    <div
+      className="viewer"
+      style={{ backgroundImage: `url(backgrounds/${background}.png)` }}
+    >
+      <div className="virtual-store">
+        <StoreNav
+          allSections={Object.keys(inventory)}
+          selected={activeSection}
+          handleClick={select}
+        />
+        <Outlet context={[activeSection, items, updateCount, cart, setLine]} />
+        <CartIcon data={cart} read={setLine} />
+      </div>
+      <NarrationBar text={line} mode={scene.mode}></NarrationBar>
     </div>
   );
 }
