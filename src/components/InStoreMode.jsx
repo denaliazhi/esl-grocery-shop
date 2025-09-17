@@ -59,7 +59,7 @@ export default function InStoreMode() {
   }
 
   return (
-    <div class="virtual-store">
+    <div className="virtual-store">
       <StoreNav
         allSections={Object.keys(inventory)}
         selected={activeSection}
