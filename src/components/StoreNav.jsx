@@ -2,7 +2,7 @@
  * This component allows the user to move between sections
  * of the grocery store.
  */
-
+import { Capitalize } from "../utils";
 import { Link } from "react-router";
 
 export default function StoreNav({ allSections, selected, handleClick }) {
@@ -17,7 +17,7 @@ export default function StoreNav({ allSections, selected, handleClick }) {
             className={section === selected ? "selected" : null}
             onClick={(e) => handleClick(e)}
           >
-            {section.charAt(0).toUpperCase() + section.slice(1)}
+            {Capitalize(section)}
           </Link>
         );
       })}

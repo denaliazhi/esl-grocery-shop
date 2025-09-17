@@ -27,8 +27,7 @@ export default function Cart() {
           {cart.count === 0 ? (
             <button className="disabled">Checkout</button>
           ) : (
-            // TO DO: change button into link and redirect
-            <button onClick={() => {}}>Checkout</button>
+            <Link to="/checkout">Checkout</Link>
           )}
         </div>
 

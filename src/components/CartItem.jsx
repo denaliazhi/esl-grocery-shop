@@ -14,7 +14,7 @@ export default function CartItem({ item, handleClick }) {
         id={item.id}
         data-section={item.section}
       >
-        <img src={`/${item.name}.png`} alt="" width="50" />
+        <img src={`/${item.name.replace(" ", "-")}.png`} alt="" width="50" />
         <div>
           <p>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
           <p>
