@@ -16,12 +16,14 @@ export default function CartItem({ item, handleClick }) {
       >
         <img src={`/${item.name.replace(" ", "-")}.png`} alt="" width="50" />
         <div>
-          <p>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
+          <p>{item.name.charAt(0).toUpperCase() + item.name.slice(1)},</p>
           <p>
             ${item.unitPrice.toFixed(2)} / {item.displayUnit}
           </p>
-          <NumberPicker value={item.count} handleClick={handleClick} />
-          <RemoveItem value={item.count} handleClick={handleClick} />
+          <div class="edit-cart">
+            <NumberPicker value={item.count} handleClick={handleClick} />
+            <RemoveItem value={item.count} handleClick={handleClick} />
+          </div>
         </div>
         <p>${totalCost.toFixed(2)}</p>
       </div>

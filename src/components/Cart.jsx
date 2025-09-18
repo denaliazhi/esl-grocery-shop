@@ -19,30 +19,48 @@ export default function Cart() {
     <>
       <div className="cart">
         <div className="cart-header">
-          <Link to={`/${section}`}>Back to store</Link>
+          <Link to={`/${section}`}>{"<"} Back to store</Link>
           <div>
-            <h1>Cart</h1>
-            <p>{`(${cart.count} items)`}</p>
+            <h2>Cart</h2>
+            <p>{`(${cart.count} item${cart.count === 1 ? "" : "s"})`}</p>
           </div>
           {cart.count === 0 ? (
-            <button className="disabled">Checkout</button>
+            <Link
+              to=""
+              aria-label="Disabled checkout button"
+              className="checkout-btn disabled"
+            >
+              Checkout
+            </Link>
           ) : (
-            <Link to="/checkout">Checkout</Link>
+            <Link className="checkout-btn" to="/checkout">
+              Checkout
+            </Link>
           )}
         </div>
 
         {cart.count > 0 ? (
           <>
-            {selectedItems.map((item) => (
-              <CartItem item={item} key={item.id} handleClick={updateCount} />
-            ))}
+            <div className="cart-items">
+              {selectedItems.map((item) => (
+                <CartItem item={item} key={item.id} handleClick={updateCount} />
+              ))}
+            </div>
             <hr />
-            <p>Total</p>
-            <p>{cart.totalCost.toFixed(2)}</p>
+            <div className="cart-total">
+              <p>Total</p>
+              <p>{cart.totalCost.toFixed(2)}</p>
+            </div>
           </>
         ) : (
-          // TO DO: add picture of empty cart
-          <p>Your cart is empty.</p>
+          <>
+            <img
+              src="/icons/cart.png"
+              alt="Empty cart"
+              className="empty-cart"
+            />
+            <p>Your cart is empty.</p>
+          </>
         )}
       </div>
     </>

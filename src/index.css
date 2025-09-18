@@ -8,6 +8,7 @@
   font-family: system-ui, Arial, sans-serif;
 
   --rounded: 0.7rem;
+  --less-rounded: 0.3rem;
   --light-grey: rgb(217, 217, 217);
   --dark-grey: rgb(100, 100, 100);
   --translucent-white: rgba(255, 255, 255, 0.9);
@@ -33,13 +34,27 @@ a:hover {
 button {
   padding: 0.25rem 0.5rem;
   border: none;
-  border-radius: 0.3rem;
+  border-radius: var(--less-rounded);
 
   background-color: var(--accent);
 }
 
 button:hover {
   cursor: pointer;
+}
+
+hr {
+  margin-top: 0.2rem;
+  border-top: 2px solid var(--light-grey);
+}
+
+.narration-bar,
+.store-nav,
+.shelf-item,
+.cart-btn,
+.cart {
+  background-color: var(--translucent-white);
+  backdrop-filter: blur(3px);
 }
 
 /* App: Header and Footer */
@@ -100,14 +115,6 @@ header p {
 
 /* Virtual Store and Child Components */
 
-.narration-bar,
-.store-nav,
-.shelf-item,
-.cart-btn {
-  background-color: var(--translucent-white);
-  backdrop-filter: blur(3px);
-}
-
 .virtual-store {
   display: flex;
   justify-content: space-between;
@@ -139,7 +146,7 @@ header p {
 .cart-btn {
   height: min-content;
   padding: 0.5rem 1rem;
-  border-radius: var(--rounded);
+  border-radius: var(--less-rounded);
 
   display: flex;
   gap: 0.5rem;
@@ -152,11 +159,13 @@ header p {
 
 /* Shelf and Shelf Items */
 
-.shelf {
+.shelf,
+.cart {
   width: 35rem;
   margin-right: 5rem;
   margin-top: 5rem;
-
+}
+.shelf {
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr 1fr;
   gap: 1rem;
@@ -201,25 +210,139 @@ header p {
 }
 
 .edit-item-btn {
+  border-radius: var(--less-rounded);
+
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+
+  background-color: var(--accent);
+}
+
+.shelf .edit-item-btn {
   position: absolute;
   top: 5%;
   right: 5%;
-
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
 }
 
 .edit-item-btn img {
   width: 1.2rem;
   height: auto;
+  margin-left: 0.25rem;
 }
 
 .edit-item-btn p {
   margin: 0 0.2rem;
 }
 
-.number-picker {
+/* Cart and Cart Items */
+.cart {
+  text-align: center;
+
+  height: 21.3rem;
+  border-radius: var(--rounded);
+
+  background-color: var(--translucent-white);
+}
+
+.cart-header {
+  margin: 1rem 1.3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-btn {
+  height: min-content;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--less-rounded);
+  background-color: rgb(182, 196, 161);
+}
+
+.cart-header > .disabled {
+  color: var(--dark-grey);
+  background-color: var(--light-grey);
+  cursor: not-allowed;
+}
+
+.cart-items {
+  text-align: left;
+  max-height: 12.5rem;
+  padding-left: 1.75rem;
+  padding-right: 1.9rem;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--light-grey) transparent;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cart-item img {
+  width: auto;
+  height: 5rem;
+}
+
+.cart-item > div {
+  margin-right: auto;
+}
+
+.cart-item > div p {
+  display: inline;
+}
+
+.cart-item > div > p:last-of-type {
+  font-size: 0.75rem;
+  color: var(--dark-grey);
+  margin-left: 0.5rem;
+}
+
+.edit-cart {
+  margin-top: 0.5rem;
+
   display: flex;
   gap: 0.5rem;
+}
+
+.remove-btn {
+  opacity: 70%;
+  background-color: transparent;
+}
+
+.remove-btn::before {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  background-image: url("/icons/trash-icon.png");
+  background-size: contain;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.cart > hr,
+.cart-total {
+  margin: 0.2rem 2rem 0;
+}
+
+.cart-total {
+  font-weight: bold;
+  padding: 0.5rem;
+
+  background-color: var(--light-grey);
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-cart + p {
+  margin-top: 0.5rem;
+  color: var(--dark-grey);
+}
+
+.empty-cart {
+  width: auto;
+  height: 9rem;
+  margin-top: 1rem;
 }
