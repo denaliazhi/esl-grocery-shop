@@ -11,7 +11,7 @@ import StoreNav from "./StoreNav.jsx";
 import CartIcon from "./CartIcon.jsx";
 import NarrationBar from "./NarrationBar";
 import { Outlet } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ShoppingMode({ scene, nextScene }) {
   const [activeSection, setActiveSection] = useState("");
@@ -20,18 +20,21 @@ export default function ShoppingMode({ scene, nextScene }) {
     count: 0,
     totalCost: 0,
   });
+  const [line, setLine] = useState(main[scene].script[0]);
 
-  // Set background image to match active grocery section
   let background = `url(backgrounds${getImagePath(
     activeSection !== "" ? activeSection : main[scene].background
   )})`;
 
-  // Set line to be shown in narration bar
-  const [line, setLine] = useState(main[scene].script[0]);
+  // const [lastEvent, setLastEvent] = useState();
+  // useEffect(() => {
+  //   let toRead = lastEvent ? interpret(lastEvent, products) : false;
+  //   if (toRead) {
+  //     setLine(toRead);
+  //   }
+  // }, [lastEvent]);
 
-  /* 
-  Adds fields to each object in a given dataset.
-  */
+  /* Adds data fields to each product in inventory */
   function modify(original) {
     let modified = {};
     for (let key of Object.keys(original)) {
@@ -44,6 +47,7 @@ export default function ShoppingMode({ scene, nextScene }) {
     return modified;
   }
 
+  /* Changes section of grocery store on display */
   function select(e) {
     let selected = e.target.id;
     setActiveSection(selected);
@@ -78,7 +82,7 @@ export default function ShoppingMode({ scene, nextScene }) {
   }
 
   function narrate(e) {
-    let toRead = interpret(e);
+    let toRead = interpret(e, products);
     // console.log(toRead);
     if (toRead) {
       setLine(toRead);
@@ -89,6 +93,9 @@ export default function ShoppingMode({ scene, nextScene }) {
     <div
       className="viewer"
       style={{ backgroundImage: background }}
+      // onClick={(e) => {
+      //   setLastEvent(e);
+      // }}
       onClick={narrate}
     >
       <div className="virtual-store">
