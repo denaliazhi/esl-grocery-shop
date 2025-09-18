@@ -3,6 +3,7 @@
  * of online grocery shopping.
  */
 
+import { getImagePath } from "../utils.js";
 import { main, sectionDetails } from "../data/lesson-content";
 import inventory from "../data/inventory.js";
 import StoreNav from "./StoreNav.jsx";
@@ -19,7 +20,12 @@ export default function ShoppingMode({ scene, nextScene }) {
     totalCost: 0,
   });
 
-  const [background, setBackground] = useState(main[scene].background);
+  // Set background image to match active grocery section
+  let background = `url(backgrounds${getImagePath(
+    activeSection !== "" ? activeSection : main[scene].background
+  )})`;
+
+  // Set line to be shown in narration bar
   const [line, setLine] = useState(main[scene].script[0]);
 
   /* 
@@ -37,12 +43,9 @@ export default function ShoppingMode({ scene, nextScene }) {
     return modified;
   }
 
-  // TO DO: move this to separate file w other event handlers
   function select(e) {
     let selected = e.target.id;
     setActiveSection(selected);
-    setBackground(selected.replace("_", "-"));
-    setLine(sectionDetails[selected]);
   }
 
   /* 
@@ -73,10 +76,16 @@ export default function ShoppingMode({ scene, nextScene }) {
     });
   }
 
+  function narrate() {
+    console.log("clicked!");
+    // setLine(sectionDetails[selected]);
+  }
+
   return (
     <div
       className="viewer"
-      style={{ backgroundImage: `url(backgrounds/${background}.png)` }}
+      style={{ backgroundImage: background }}
+      onClick={narrate}
     >
       <div className="virtual-store">
         <StoreNav
@@ -84,10 +93,8 @@ export default function ShoppingMode({ scene, nextScene }) {
           selected={activeSection}
           handleClick={select}
         />
-        <Outlet
-          context={[activeSection, products, updateCount, cart, setLine]}
-        />
-        <CartIcon data={cart} read={setLine} />
+        <Outlet context={[activeSection, products, updateCount, cart]} />
+        <CartIcon data={cart} />
       </div>
       <NarrationBar text={line} mode={scene.mode}></NarrationBar>
     </div>

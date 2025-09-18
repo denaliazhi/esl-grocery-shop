@@ -10,7 +10,7 @@ function IsPlural(word) {
 }
 
 function getImagePath(name) {
-  return `/${name.replace(" ", "-")}.png`;
+  return `/${name.replace(/ |_/, "-")}.png`;
 }
 
 export { Capitalize, IsPlural, getImagePath };
