@@ -9,4 +9,8 @@ function IsPlural(word) {
   return lastChar === "s";
 }
 
-export { Capitalize, IsPlural };
+function getImagePath(name) {
+  return `/${name.replace(" ", "-")}.png`;
+}
+
+export { Capitalize, IsPlural, getImagePath };

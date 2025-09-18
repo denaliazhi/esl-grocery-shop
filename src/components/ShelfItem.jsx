@@ -3,8 +3,7 @@
  */
 import AddItem from "./AddItem";
 import NumberPicker from "./NumberPicker";
-import RemoveItem from "./RemoveItem";
-import { Capitalize, IsPlural } from "../utils";
+import { Capitalize, IsPlural, getImagePath } from "../utils";
 
 export default function ShelfItem({ item, handleClick, read }) {
   function handleHover() {
@@ -19,7 +18,7 @@ export default function ShelfItem({ item, handleClick, read }) {
         data-section={item.section}
         onMouseOver={handleHover}
       >
-        <img src={`/${item.name.replace(" ", "-")}.png`} alt="" width="100" />
+        <img src={getImagePath(item.name)} alt="" width="100" />
         <div className="item-label">
           <h3>{Capitalize(item.name)}</h3>
           <div className="item-price">

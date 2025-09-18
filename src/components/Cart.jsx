@@ -5,21 +5,18 @@
 import { Link, useOutletContext } from "react-router";
 import CartItem from "./CartItem";
 export default function Cart() {
-  const [section, items, updateCount, cart] = useOutletContext();
+  const [activeSection, products, updateCount, cart] = useOutletContext();
 
   let selectedItems = [];
-  function getCartItems() {
-    for (let key of Object.keys(items)) {
-      selectedItems.push(...items[key].filter((item) => item.count > 0));
-    }
+  for (let section of Object.keys(products)) {
+    selectedItems.push(...products[section].filter((item) => item.count > 0));
   }
-  getCartItems();
 
   return (
     <>
       <div className="cart">
         <div className="cart-header">
-          <Link to={`/${section}`}>{"<"} Back to store</Link>
+          <Link to={`/${activeSection}`}>{"<"} Back to store</Link>
           <div>
             <h2>Cart</h2>
             <p>{`(${cart.count} item${cart.count === 1 ? "" : "s"})`}</p>

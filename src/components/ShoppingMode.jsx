@@ -12,18 +12,19 @@ import { Outlet } from "react-router";
 import { useState } from "react";
 
 export default function ShoppingMode({ scene, nextScene }) {
-  console.log("rendered");
   const [activeSection, setActiveSection] = useState("");
-  const [items, setItems] = useState(modify(inventory));
+  const [products, setProducts] = useState(modify(inventory));
   const [cart, setCart] = useState({
     count: 0,
     totalCost: 0,
   });
 
-  console.log(items["bakery"][0]);
   const [background, setBackground] = useState(main[scene].background);
   const [line, setLine] = useState(main[scene].script[0]);
 
+  /* 
+  Adds fields to each object in a given dataset.
+  */
   function modify(original) {
     let modified = {};
     for (let key of Object.keys(original)) {
@@ -36,6 +37,7 @@ export default function ShoppingMode({ scene, nextScene }) {
     return modified;
   }
 
+  // TO DO: move this to separate file w other event handlers
   function select(e) {
     let selected = e.target.id;
     setActiveSection(selected);
@@ -43,28 +45,31 @@ export default function ShoppingMode({ scene, nextScene }) {
     setLine(sectionDetails[selected]);
   }
 
-  // TO DO: think this breaks SOLID
-  // Update item's count, cart's total count, and cart's total cost
+  /* 
+  Keeps the cart and products states in sync. 
+  Called whenever the user modifies a item's count
+  by `num` where `num` is 1, -1, or -[item.count].
+  */
   function updateCount(e, num) {
-    const product = e.target.closest(".product");
-    const section = product.dataset.section;
-    console.log(product.id);
-    const index = items[section].findIndex((item) => item.id === product.id);
-    console.log(index);
-    const updatedItems = items[section].map((item, i) => {
-      if (i === index) {
+    const clicked = e.target.closest(".product");
+    const section = clicked.dataset.section;
+
+    const updatedSection = products[section].map((item) => {
+      if (item.id === clicked.id) {
+        // Update state of cart
         setCart({
           count: cart.count + num,
           totalCost: cart.totalCost + num * item.unitPrice,
         });
         return { ...item, count: item.count + num };
+      } else {
+        return item;
       }
-      return item;
     });
-    console.log(updatedItems);
-    setItems({
-      ...items,
-      [section]: updatedItems,
+    // Update state of products
+    setProducts({
+      ...products,
+      [section]: updatedSection,
     });
   }
 
@@ -79,7 +84,9 @@ export default function ShoppingMode({ scene, nextScene }) {
           selected={activeSection}
           handleClick={select}
         />
-        <Outlet context={[activeSection, items, updateCount, cart, setLine]} />
+        <Outlet
+          context={[activeSection, products, updateCount, cart, setLine]}
+        />
         <CartIcon data={cart} read={setLine} />
       </div>
       <NarrationBar text={line} mode={scene.mode}></NarrationBar>
