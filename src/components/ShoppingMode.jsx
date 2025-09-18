@@ -82,7 +82,7 @@ export default function ShoppingMode({ scene, nextScene }) {
   }
 
   function narrate(e) {
-    let toRead = interpret(e, products);
+    let toRead = interpret(e, cart, products);
     // console.log(toRead);
     if (toRead) {
       setLine(toRead);

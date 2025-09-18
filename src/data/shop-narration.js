@@ -10,7 +10,7 @@ const overviews = {
     "I'm in the frozen foods section. Frozen food lasts a very long time.",
 };
 
-export default function interpret(e, products) {
+export default function interpret(e, cart, products) {
   let clicked = e.target;
 
   if (
@@ -27,7 +27,6 @@ export default function interpret(e, products) {
   ) {
     let product = clicked.closest(".product");
 
-    console.log(product);
     let section = product.dataset.section;
     product = products[section].find((item) => item.id === product.id);
     let unit = product.speechUnit;
@@ -50,6 +49,11 @@ export default function interpret(e, products) {
     } else {
       return `I will not buy the ${product.name}. I removed it from my cart.`;
     }
+  } else if (
+    // Clicked on cart icon
+    clicked.closest(".cart-btn")
+  ) {
+    return `I have ${cart.count} items in my cart.`;
   }
   return false;
 }
