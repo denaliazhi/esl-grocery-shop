@@ -3,7 +3,7 @@
  * linear click-through format.
  */
 import NarrationBar from "./NarrationBar";
-import { main } from "../data/lesson-content";
+import main from "../data/lesson-content";
 import { useState } from "react";
 
 export default function TutorialMode({ scene, nextScene }) {

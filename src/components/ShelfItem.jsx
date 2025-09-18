@@ -3,24 +3,24 @@
  */
 import AddItem from "./AddItem";
 import NumberPicker from "./NumberPicker";
-import { Capitalize, IsPlural, getImagePath } from "../utils";
+import { capitalize, isPlural, getImagePath } from "../utils";
 
 export default function ShelfItem({ item, handleClick, read }) {
-  function handleHover() {
-    let costsOrCost = IsPlural(item.name) ? "cost" : "costs";
-    // read(`The ${item.name} ${costsOrCost} $${item.unitPrice}.`);
-  }
+  // function handleHover() {
+  //   let costsOrCost = isPlural(item.name) ? "cost" : "costs";
+  // read(`The ${item.name} ${costsOrCost} $${item.unitPrice}.`);
+  // }
   return (
     <>
       <div
         className="product shelf-item"
         id={item.id}
         data-section={item.section}
-        onMouseOver={handleHover}
+        // onMouseOver={handleHover}
       >
         <img src={getImagePath(item.name)} alt="" width="100" />
         <div className="item-label">
-          <h3>{Capitalize(item.name)}</h3>
+          <h3>{capitalize(item.name)}</h3>
           <div className="item-price">
             <p>${item.unitPrice.toFixed(2)} /</p>
             <p>{item.displayUnit}</p>

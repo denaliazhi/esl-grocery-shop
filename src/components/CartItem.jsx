@@ -3,7 +3,7 @@
  */
 import NumberPicker from "./NumberPicker";
 import RemoveItem from "./RemoveItem";
-import { Capitalize, getImagePath } from "../utils.js";
+import { capitalize, getImagePath } from "../utils.js";
 
 export default function CartItem({ item, handleClick }) {
   let totalCost = item.count * item.unitPrice;
@@ -16,7 +16,7 @@ export default function CartItem({ item, handleClick }) {
       >
         <img src={getImagePath(item.name)} alt="" width="50" />
         <div>
-          <p>{Capitalize(item.name)},</p>
+          <p>{capitalize(item.name)},</p>
           <p>
             ${item.unitPrice.toFixed(2)} / {item.displayUnit}
           </p>

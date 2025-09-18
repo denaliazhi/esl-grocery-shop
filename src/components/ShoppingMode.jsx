@@ -4,7 +4,8 @@
  */
 
 import { getImagePath } from "../utils.js";
-import { main, sectionDetails } from "../data/lesson-content";
+import interpret from "../data/shop-narration.js";
+import main from "../data/lesson-content";
 import inventory from "../data/inventory.js";
 import StoreNav from "./StoreNav.jsx";
 import CartIcon from "./CartIcon.jsx";
@@ -50,7 +51,7 @@ export default function ShoppingMode({ scene, nextScene }) {
 
   /* 
   Keeps the cart and products states in sync. 
-  Called whenever the user modifies a item's count
+  Called whenever the user modifies an item's count
   by `num` where `num` is 1, -1, or -[item.count].
   */
   function updateCount(e, num) {
@@ -76,9 +77,12 @@ export default function ShoppingMode({ scene, nextScene }) {
     });
   }
 
-  function narrate() {
-    console.log("clicked!");
-    // setLine(sectionDetails[selected]);
+  function narrate(e) {
+    let toRead = interpret(e);
+    // console.log(toRead);
+    if (toRead) {
+      setLine(toRead);
+    }
   }
 
   return (
