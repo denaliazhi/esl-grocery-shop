@@ -10,8 +10,10 @@ export default function App() {
   return (
     <>
       <Header />
-      <h1>Grocery Shopping</h1>
-      <Lesson></Lesson>
+      <div>
+        <h1>Grocery Shopping</h1>
+        <Lesson></Lesson>
+      </div>
       <Footer />
     </>
   );

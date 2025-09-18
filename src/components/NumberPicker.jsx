@@ -5,7 +5,7 @@
 
 export default function NumberPicker({ value, handleClick }) {
   return (
-    <div className="number-picker">
+    <div className="edit-item-btn">
       <button onClick={(e) => handleClick(e, -1)}>-</button>
       <p>{value}</p>
       <button onClick={(e) => handleClick(e, 1)}>+</button>

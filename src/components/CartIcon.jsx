@@ -11,7 +11,13 @@ export default function CartIcon({ data, read }) {
 
   return (
     <>
-      <Link to="/cart" className="cart-btn" onMouseOver={handleHover}>
+      <Link
+        to="/cart"
+        className="cart-btn"
+        aria-label="View cart"
+        onMouseOver={handleHover}
+      >
+        <img src="/icons/cart-icon.png" alt="Cart icon" />
         {data.count}
       </Link>
     </>

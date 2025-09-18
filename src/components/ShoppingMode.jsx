@@ -12,6 +12,7 @@ import { Outlet } from "react-router";
 import { useState } from "react";
 
 export default function ShoppingMode({ scene, nextScene }) {
+  console.log("rendered");
   const [activeSection, setActiveSection] = useState("");
   const [items, setItems] = useState(modify(inventory));
   const [cart, setCart] = useState({
@@ -19,6 +20,7 @@ export default function ShoppingMode({ scene, nextScene }) {
     totalCost: 0,
   });
 
+  console.log(items["bakery"][0]);
   const [background, setBackground] = useState(main[scene].background);
   const [line, setLine] = useState(main[scene].script[0]);
 
@@ -46,7 +48,9 @@ export default function ShoppingMode({ scene, nextScene }) {
   function updateCount(e, num) {
     const product = e.target.closest(".product");
     const section = product.dataset.section;
+    console.log(product.id);
     const index = items[section].findIndex((item) => item.id === product.id);
+    console.log(index);
     const updatedItems = items[section].map((item, i) => {
       if (i === index) {
         setCart({
@@ -57,6 +61,7 @@ export default function ShoppingMode({ scene, nextScene }) {
       }
       return item;
     });
+    console.log(updatedItems);
     setItems({
       ...items,
       [section]: updatedItems,

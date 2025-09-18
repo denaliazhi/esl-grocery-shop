@@ -9,7 +9,7 @@ import { Capitalize, IsPlural } from "../utils";
 export default function ShelfItem({ item, handleClick, read }) {
   function handleHover() {
     let costsOrCost = IsPlural(item.name) ? "cost" : "costs";
-    read(`The ${item.name} ${costsOrCost} $${item.unitPrice}.`);
+    // read(`The ${item.name} ${costsOrCost} $${item.unitPrice}.`);
   }
   return (
     <>
@@ -20,20 +20,18 @@ export default function ShelfItem({ item, handleClick, read }) {
         onMouseOver={handleHover}
       >
         <img src={`/${item.name.replace(" ", "-")}.png`} alt="" width="100" />
-        <p>{Capitalize(item.name)}</p>
-        <p>
-          ${item.unitPrice.toFixed(2)} / {item.displayUnit}
-        </p>
+        <div className="item-label">
+          <h3>{Capitalize(item.name)}</h3>
+          <div className="item-price">
+            <p>${item.unitPrice.toFixed(2)} /</p>
+            <p>{item.displayUnit}</p>
+          </div>
+        </div>
         {item.count === 0 ? (
           <AddItem handleClick={handleClick} read={read} />
         ) : (
           <>
             <NumberPicker
-              value={item.count}
-              handleClick={handleClick}
-              read={read}
-            />
-            <RemoveItem
               value={item.count}
               handleClick={handleClick}
               read={read}

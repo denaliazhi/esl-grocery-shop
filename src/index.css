@@ -1,104 +1,222 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  --rounded: 0.7rem;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  font-family: system-ui, Arial, sans-serif;
+
+  --rounded: 0.7rem;
+  --light-grey: rgb(217, 217, 217);
+  --dark-grey: rgb(100, 100, 100);
+  --translucent-white: rgba(255, 255, 255, 0.9);
+  --accent: rgb(189, 208, 220);
+}
+
 body {
-  display: flex;
-  justify-content: center;
-  place-items: center;
+  font-size: 0.9rem;
   min-height: 100vh;
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
+a,
+a:visited,
+a:active {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 button {
   padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: 0.3rem;
+
+  background-color: var(--accent);
 }
 
-.viewer {
-  width: 50rem;
-  height: 34rem;
-  border: 1px solid black;
-  border-radius: var(--rounded);
-  padding: 1rem;
+button:hover {
+  cursor: pointer;
+}
+
+/* App: Header and Footer */
+
+#app {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   justify-content: space-between;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+  padding: 0.5rem 1rem;
+
+  background-color: var(--light-grey);
+}
+
+header p {
+  color: var(--dark-grey);
+}
+
+#app > div > h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Viewer and Narration Bar */
+
+.viewer {
+  width: 60rem;
+  height: 34rem;
+  padding: 1rem;
+  border-radius: var(--rounded);
+
   background-size: cover;
   background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: space-between;
 }
 
 .narration-bar {
-  border-radius: var(--rounded);
+  align-self: center;
+
+  width: 35rem;
   padding: 1rem;
-  background-color: antiquewhite;
   margin-top: auto;
+  border-radius: var(--rounded);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Virtual Store and Child Components */
+
+.narration-bar,
+.store-nav,
+.shelf-item,
+.cart-btn {
+  background-color: var(--translucent-white);
+  backdrop-filter: blur(3px);
 }
 
 .virtual-store {
   display: flex;
+  justify-content: space-between;
 }
 
+/* Store Nav  */
+
 .store-nav {
+  height: min-content;
+  padding: 1rem;
+  border-radius: var(--rounded);
+
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  border-radius: var(--rounded);
-  padding: 1rem;
-  height: min-content;
-  background-color: antiquewhite;
+}
+
+.store-nav li {
+  padding: 0.2rem 0.5rem;
+  list-style: none;
 }
 
 .selected {
-  background-color: rgb(121, 180, 93);
+  font-weight: bold;
+  background-color: var(--accent);
 }
+
+/* Cart */
 
 .cart-btn {
-  padding: 1rem;
-  border-radius: var(--rounded);
   height: min-content;
-  background-color: antiquewhite;
-  margin-left: auto;
+  padding: 0.5rem 1rem;
+  border-radius: var(--rounded);
+
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
+.cart-btn img {
+  width: 1.2rem;
+}
+
+/* Shelf and Shelf Items */
+
 .shelf {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  width: 35rem;
+  margin-right: 5rem;
+  margin-top: 5rem;
+
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr 1fr;
   gap: 1rem;
-  max-width: 37rem;
 }
 
 .shelf-item {
-  width: 11rem;
-  padding: 1rem;
-  border-radius: var(--rounded);
   text-align: center;
-  background-color: rgba(250, 235, 215, 0.932);
+  width: 100%;
+  padding-top: 0.5rem;
+  border-radius: var(--rounded);
+
+  position: relative;
 }
 
 .shelf-item img {
   height: 6rem;
   width: auto;
+}
+
+.item-label {
+  height: 3.38rem;
+  padding: 0.5rem 1rem;
+  border-bottom-left-radius: var(--rounded);
+  border-bottom-right-radius: var(--rounded);
+
+  background-color: white;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 0.2rem;
+}
+
+.item-label h3 {
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.item-price {
+  width: 7ch;
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.edit-item-btn {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.edit-item-btn img {
+  width: 1.2rem;
+  height: auto;
+}
+
+.edit-item-btn p {
+  margin: 0 0.2rem;
 }
 
 .number-picker {

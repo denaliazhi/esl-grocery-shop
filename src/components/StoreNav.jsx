@@ -7,20 +7,23 @@ import { Link } from "react-router";
 
 export default function StoreNav({ allSections, selected, handleClick }) {
   return (
-    <div className="store-nav">
+    <ul className="store-nav">
       {allSections.map((section) => {
         return (
-          <Link
-            to={`/${section}`}
-            id={section}
+          <li
             key={section}
             className={section === selected ? "selected" : null}
-            onClick={(e) => handleClick(e)}
           >
-            {Capitalize(section)}
-          </Link>
+            <Link
+              to={`/${section}`}
+              id={section}
+              onClick={(e) => handleClick(e)}
+            >
+              {Capitalize(section)}
+            </Link>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }
