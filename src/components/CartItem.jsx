@@ -20,7 +20,7 @@ export default function CartItem({ item, handleClick }) {
           <p>
             ${item.unitPrice.toFixed(2)} / {item.displayUnit}
           </p>
-          <div class="edit-cart">
+          <div className="edit-cart">
             <NumberPicker value={item.count} handleClick={handleClick} />
             <RemoveItem value={item.count} handleClick={handleClick} />
           </div>

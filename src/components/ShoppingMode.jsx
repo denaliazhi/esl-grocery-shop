@@ -26,13 +26,15 @@ export default function ShoppingMode({ scene, nextScene }) {
     activeSection !== "" ? activeSection : main[scene].background
   )})`;
 
-  // const [lastEvent, setLastEvent] = useState();
-  // useEffect(() => {
-  //   let toRead = lastEvent ? interpret(lastEvent, products) : false;
-  //   if (toRead) {
-  //     setLine(toRead);
-  //   }
-  // }, [lastEvent]);
+  const [lastEvent, setLastEvent] = useState();
+  useEffect(() => {
+    console.log(lastEvent);
+    let toRead = lastEvent ? interpret(lastEvent, cart, products) : false;
+    console.log(toRead);
+    if (toRead) {
+      setLine(toRead);
+    }
+  }, [lastEvent]);
 
   /* Adds data fields to each product in inventory */
   function modify(original) {
@@ -51,6 +53,7 @@ export default function ShoppingMode({ scene, nextScene }) {
   function select(e) {
     let selected = e.target.id;
     setActiveSection(selected);
+    setLastEvent({ target: "nav-bar", section: selected });
   }
 
   /* 
@@ -79,25 +82,16 @@ export default function ShoppingMode({ scene, nextScene }) {
       ...products,
       [section]: updatedSection,
     });
+
+    setLastEvent({ target: "product", section: section, id: clicked.id });
   }
 
-  function narrate(e) {
-    let toRead = interpret(e, cart, products);
-    // console.log(toRead);
-    if (toRead) {
-      setLine(toRead);
-    }
+  function readCart() {
+    setLastEvent({ target: "cart" });
   }
 
   return (
-    <div
-      className="viewer"
-      style={{ backgroundImage: background }}
-      // onClick={(e) => {
-      //   setLastEvent(e);
-      // }}
-      onClick={narrate}
-    >
+    <div className="viewer" style={{ backgroundImage: background }}>
       <div className="virtual-store">
         <StoreNav
           allSections={Object.keys(inventory)}
@@ -105,7 +99,7 @@ export default function ShoppingMode({ scene, nextScene }) {
           handleClick={select}
         />
         <Outlet context={[activeSection, products, updateCount, cart]} />
-        <CartIcon data={cart} />
+        <CartIcon data={cart} handleClick={readCart} />
       </div>
       <NarrationBar text={line} mode={scene.mode}></NarrationBar>
     </div>

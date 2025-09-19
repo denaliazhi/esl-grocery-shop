@@ -4,18 +4,15 @@
  */
 import { Link } from "react-router";
 
-export default function CartIcon({ data, read }) {
-  // function handleHover() {
-  //   read(`I have ${data.count} items in my cart.`);
-  // }
-
+export default function CartIcon({ data, handleClick }) {
   return (
     <>
       <Link
         to="/cart"
         className="cart-btn"
         aria-label="View cart"
-        // onMouseOver={handleHover}
+        onClick={handleClick}
+        onMouseOver={handleClick}
       >
         <img src="/icons/cart-icon.png" alt="Cart icon" />
         {data.count}

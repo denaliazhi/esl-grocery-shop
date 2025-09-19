@@ -11,24 +11,17 @@ const overviews = {
 };
 
 export default function interpret(e, cart, products) {
-  let clicked = e.target;
-
   if (
     // Clicked on section link in store nav
-    clicked.closest(".store-nav") &&
-    clicked.nodeName === "A"
+    e.target === "nav-bar"
   ) {
-    let section = clicked.text.toLowerCase().replace(" ", "_");
+    let section = e.section.toLowerCase().replace(" ", "_");
     return overviews[section];
   } else if (
     // Clicked on a product edit-button (Add, Remove, or Number Picker)
-    clicked.closest(".edit-item-btn") ||
-    clicked.closest(".remove-btn")
+    e.target === "product"
   ) {
-    let product = clicked.closest(".product");
-
-    let section = product.dataset.section;
-    product = products[section].find((item) => item.id === product.id);
+    let product = products[e.section].find((item) => item.id === e.id);
     let unit = product.speechUnit;
 
     if (product.count === 1) {
@@ -51,9 +44,11 @@ export default function interpret(e, cart, products) {
     }
   } else if (
     // Clicked on cart icon
-    clicked.closest(".cart-btn")
+    e.target === "cart"
   ) {
-    return `I have ${cart.count} items in my cart.`;
+    return `I have ${cart.count} item${
+      cart.count === 1 ? "" : "s"
+    } in my cart.`;
   }
   return false;
 }
