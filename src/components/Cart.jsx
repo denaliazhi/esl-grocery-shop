@@ -5,7 +5,15 @@
 import { Link, useOutletContext } from "react-router";
 import CartItem from "./CartItem";
 export default function Cart() {
-  const [activeSection, products, updateCount, cart] = useOutletContext();
+  const [
+    activeSection,
+    products,
+    updateCount,
+    cart,
+    ,
+    setLastEvent,
+    handleCheckout,
+  ] = useOutletContext();
 
   let selectedItems = [];
   for (let section of Object.keys(products)) {
@@ -30,7 +38,12 @@ export default function Cart() {
               Checkout
             </Link>
           ) : (
-            <Link className="checkout-btn" to="/checkout">
+            <Link
+              className="checkout-btn"
+              to="/checkout"
+              onMouseOver={() => setLastEvent({ target: "pre-checkout" })}
+              onClick={handleCheckout}
+            >
               Checkout
             </Link>
           )}

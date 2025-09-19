@@ -9,6 +9,11 @@ const main = {
     background: "lobby",
     script: ["Where will I go first?"],
   },
+  checkout: {
+    name: "checkout",
+    background: "parking-lot",
+    script: ["I finished shopping. I'll go home now."],
+  },
 };
 
 export default main;

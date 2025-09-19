@@ -6,7 +6,7 @@ import NarrationBar from "./NarrationBar";
 import main from "../data/lesson-content";
 import { useState } from "react";
 
-export default function TutorialMode({ scene, nextScene }) {
+export default function TutorialMode({ scene, setScene }) {
   // Track current line in scene
   const [lineIndex, setLineIndex] = useState(0);
   let line = main[scene].script[lineIndex];
@@ -14,8 +14,11 @@ export default function TutorialMode({ scene, nextScene }) {
   function nextLine() {
     if (lineIndex !== main[scene].script.length - 1) {
       setLineIndex(lineIndex + 1);
+    } else if (scene === "intro") {
+      setScene("shopping");
     } else {
-      nextScene("shopping");
+      // TO DO: trigger end screen
+      return;
     }
   }
   return (

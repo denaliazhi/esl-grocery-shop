@@ -1,3 +1,8 @@
+/**
+ * This file determines the content that should be
+ * displayed in the narration bar.
+ */
+
 import { getArticle } from "../utils";
 import pluralize, { isPlural } from "pluralize";
 
@@ -21,7 +26,9 @@ export default function interpret(e, cart, products) {
     // Clicked on a product edit-button (Add, Remove, or Number Picker)
     e.target === "product"
   ) {
+    console.log(e);
     let product = products[e.section].find((item) => item.id === e.id);
+    console.log(product);
     let unit = product.speechUnit;
 
     if (product.count === 1) {
@@ -43,12 +50,22 @@ export default function interpret(e, cart, products) {
       return `I will not buy the ${product.name}. I removed it from my cart.`;
     }
   } else if (
-    // Clicked on cart icon
+    // Hover over or clicked on cart icon
     e.target === "cart"
   ) {
     return `I have ${cart.count} item${
       cart.count === 1 ? "" : "s"
     } in my cart.`;
+  } else if (
+    // Hover over checkout button
+    e.target === "pre-checkout"
+  ) {
+    return "Should I checkout now?";
+  } else if (
+    // Clicked checkout button
+    e.target === "post-checkout"
+  ) {
+    return "I checked out. Here's my receipt.";
   }
   return false;
 }

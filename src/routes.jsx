@@ -1,7 +1,7 @@
 import App from "./App";
 import Cart from "./components/Cart";
 import Shelf from "./components/Shelf";
-import Checkout from "./components/Checkout";
+import Receipt from "./components/Receipt";
 
 const routes = [
   {
@@ -18,7 +18,7 @@ const routes = [
       },
       {
         path: "/checkout",
-        element: <Checkout />,
+        element: <Receipt />,
       },
     ],
   },

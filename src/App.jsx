@@ -12,9 +12,9 @@ export default function App() {
       <div>
         <h1>Grocery Shopping</h1>
         {scene === "intro" || scene === "checkout" ? (
-          <TutorialMode scene={scene} nextScene={setScene} />
+          <TutorialMode scene={scene} setScene={setScene} />
         ) : (
-          <ShoppingMode scene={scene} nextScene={setScene} />
+          <ShoppingMode scene={scene} setScene={setScene} />
         )}
       </div>
     </>

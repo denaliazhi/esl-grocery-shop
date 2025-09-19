@@ -13,7 +13,7 @@ import NarrationBar from "./NarrationBar";
 import { Outlet } from "react-router";
 import { useState, useEffect } from "react";
 
-export default function ShoppingMode({ scene, nextScene }) {
+export default function ShoppingMode({ scene, setScene }) {
   const [activeSection, setActiveSection] = useState("");
   const [products, setProducts] = useState(modify(inventory));
   const [cart, setCart] = useState({
@@ -28,9 +28,7 @@ export default function ShoppingMode({ scene, nextScene }) {
 
   const [lastEvent, setLastEvent] = useState();
   useEffect(() => {
-    console.log(lastEvent);
     let toRead = lastEvent ? interpret(lastEvent, cart, products) : false;
-    console.log(toRead);
     if (toRead) {
       setLine(toRead);
     }
@@ -53,6 +51,7 @@ export default function ShoppingMode({ scene, nextScene }) {
   function select(e) {
     let selected = e.target.id;
     setActiveSection(selected);
+    // Trigger narration of this change
     setLastEvent({ target: "nav-bar", section: selected });
   }
 
@@ -82,24 +81,42 @@ export default function ShoppingMode({ scene, nextScene }) {
       ...products,
       [section]: updatedSection,
     });
-
+    // Trigger narration of this change
     setLastEvent({ target: "product", section: section, id: clicked.id });
   }
 
-  function readCart() {
-    setLastEvent({ target: "cart" });
+  function handleCheckout() {
+    setActiveSection("parking lot");
+    setLastEvent({ target: "post-checkout" });
   }
 
   return (
     <div className="viewer" style={{ backgroundImage: background }}>
       <div className="virtual-store">
-        <StoreNav
-          allSections={Object.keys(inventory)}
-          selected={activeSection}
-          handleClick={select}
+        {activeSection !== "parking lot" && (
+          <StoreNav
+            allSections={Object.keys(inventory)}
+            selected={activeSection}
+            handleClick={select}
+          />
+        )}
+        <Outlet
+          context={[
+            activeSection,
+            products,
+            updateCount,
+            cart,
+            setScene,
+            setLastEvent,
+            handleCheckout,
+          ]}
         />
-        <Outlet context={[activeSection, products, updateCount, cart]} />
-        <CartIcon data={cart} handleClick={readCart} />
+        {activeSection !== "parking lot" && (
+          <CartIcon
+            data={cart}
+            handleClick={() => setLastEvent({ target: "cart" })}
+          />
+        )}
       </div>
       <NarrationBar text={line} mode={scene.mode}></NarrationBar>
     </div>
