@@ -18,6 +18,12 @@
 body {
   font-size: 0.9rem;
   min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
 }
 
 a,
@@ -58,14 +64,6 @@ hr {
 }
 
 /* App: Header and Footer */
-
-#app {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-content: space-between;
-  align-items: center;
-}
 
 header {
   width: 100%;

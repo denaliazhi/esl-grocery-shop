@@ -1,20 +1,22 @@
 /**
  * This component is the app's entry point.
  */
-
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Lesson from "./components/Lesson";
+import { useState } from "react";
+import ShoppingMode from "./components/ShoppingMode";
+import TutorialMode from "./components/TutorialMode";
 
 export default function App() {
+  const [scene, setScene] = useState("intro");
   return (
     <>
-      <Header />
       <div>
         <h1>Grocery Shopping</h1>
-        <Lesson></Lesson>
+        {scene === "intro" || scene === "checkout" ? (
+          <TutorialMode scene={scene} nextScene={setScene} />
+        ) : (
+          <ShoppingMode scene={scene} nextScene={setScene} />
+        )}
       </div>
-      <Footer />
     </>
   );
 }
