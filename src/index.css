@@ -344,3 +344,55 @@ header p {
   height: 9rem;
   margin-top: 1rem;
 }
+
+/* Receipt and Receipt Items */
+
+.receipt {
+  text-align: center;
+  width: 18rem;
+  height: 25rem;
+  padding: 1rem 1rem 1rem 1.75rem;
+  margin: 2rem auto 0;
+  border-radius: var(--rounded);
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--light-grey) transparent;
+}
+
+.receipt-items {
+  text-align: left;
+}
+
+.receipt-items > div {
+  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.receipt-items > div > div {
+  margin-right: auto;
+}
+
+.receipt-items > div > div > p:last-of-type {
+  color: var(--dark-grey);
+}
+
+.receipt-total > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.receipt-total > div > p:first-of-type {
+  font-weight: bold;
+}
+
+.receipt > p:last-of-type {
+  margin-top: 1rem;
+}

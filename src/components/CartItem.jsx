@@ -1,5 +1,5 @@
 /**
- * This component renders the details for an item in cart view.
+ * This component renders details for an item in cart view.
  */
 import NumberPicker from "./NumberPicker";
 import RemoveItem from "./RemoveItem";
