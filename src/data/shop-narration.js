@@ -15,7 +15,7 @@ const overviews = {
     "I'm in the frozen foods section. Frozen food lasts a very long time.",
 };
 
-export default function interpret(e, cart, products) {
+export default function interpret(e, cart) {
   if (
     // Clicked on section link in store nav
     e.target === "nav-bar"
@@ -26,7 +26,7 @@ export default function interpret(e, cart, products) {
     // Clicked on a product edit-button (Add, Remove, or Number Picker)
     e.target === "product"
   ) {
-    let product = products[e.section].find((item) => item.id === e.id); // TO DO: move logic to useEffect
+    let product = cart.items.find((item) => item.id === e.id);
     let unit = product.speechUnit;
 
     if (product.count === 1) {
@@ -55,12 +55,12 @@ export default function interpret(e, cart, products) {
       cart.count === 1 ? "" : "s"
     } in my cart.`;
   } else if (
-    // Hover over checkout button, items in cart
+    // Hovered over checkout button, items in cart
     e.target === "pre-checkout"
   ) {
     return "Should I checkout now?";
   } else if (
-    // Hover over checkout button, no items in cart
+    // Hovered over checkout button, no items in cart
     e.target === "no-checkout"
   ) {
     return "I don't have anything to checkout.";
@@ -69,6 +69,38 @@ export default function interpret(e, cart, products) {
     e.target === "post-checkout"
   ) {
     return "I checked out. Here's my receipt.";
+  } else if (
+    // Hovered over receipt header
+    e.target === "receipt-header"
+  ) {
+    return "I went shopping at Green Goods.";
+  } else if (
+    // Hovered over receipt item
+    e.target === "receipt-item"
+  ) {
+    let product = cart.items.find((item) => item.id === e.id);
+    let unit = product.speechUnit;
+
+    if (product.count === 1) {
+      return `I bought ${
+        unit !== ""
+          ? getArticle(unit) + " " + unit + " of"
+          : getArticle(product.name)
+      } ${product.name} for $${product.unitPrice}.`;
+    } else if (product.count > 1) {
+      return `I bought ${product.count} ${
+        unit !== ""
+          ? pluralize(unit) + ` of ${product.name}.`
+          : isPlural(product.name)
+          ? product.name
+          : pluralize(product.name) + ` for $${product.totalCost}.`
+      }`;
+    }
+  } else if (
+    // Hovered over receipt total
+    e.target === "receipt-total"
+  ) {
+    return `I spent $${cart.totalCost} on groceries.`;
   }
   return false;
 }

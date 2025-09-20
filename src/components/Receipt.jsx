@@ -11,7 +11,12 @@ export default function Receipt() {
 
   return (
     <div className="receipt">
-      <div className="receipt-header">
+      <div
+        className="receipt-header"
+        onMouseOver={() => {
+          setLastEvent({ target: "receipt-header" });
+        }}
+      >
         <h2>Green Goods</h2>
         <p>123 Main Street</p>
         <p>San Francisco, CA</p>
@@ -19,7 +24,7 @@ export default function Receipt() {
       <hr />
       <div className="receipt-items">
         {cart.items.map((item) => (
-          <ReceiptItem item={item} key={item.id} />
+          <ReceiptItem item={item} key={item.id} read={setLastEvent} />
         ))}
       </div>
       <hr />
@@ -32,7 +37,7 @@ export default function Receipt() {
           <p>Tax</p>
           <p>0.00</p>
         </div>
-        <div>
+        <div onMouseOver={() => setLastEvent({ target: "receipt-total" })}>
           <p>Total</p>
           <p>${cart.totalCost.toFixed(2)}</p>
         </div>
