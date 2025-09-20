@@ -5,7 +5,7 @@
 import { Link, useOutletContext } from "react-router";
 import CartItem from "./CartItem";
 export default function Cart() {
-  const [activeSection, , updateCount, cart, , setLastEvent, handleCheckout] =
+  const { activeSection, updateCount, cart, setLastEvent, handleCheckout } =
     useOutletContext();
 
   return (

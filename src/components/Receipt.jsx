@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router";
 import ReceiptItem from "./ReceiptItem";
 
 export default function Receipt() {
-  const [, , , cart, , setLastEvent] = useOutletContext();
+  const { cart, setLastEvent } = useOutletContext();
 
   return (
     <div className="receipt">

@@ -114,7 +114,7 @@ export default function ShoppingMode({ scene, setScene }) {
           />
         )}
         <Outlet
-          context={[
+          context={{
             activeSection,
             products,
             updateCount,
@@ -122,7 +122,7 @@ export default function ShoppingMode({ scene, setScene }) {
             setScene,
             setLastEvent,
             handleCheckout,
-          ]}
+          }}
         />
         {activeSection !== "parking lot" && (
           <CartIcon

@@ -7,7 +7,7 @@ import { useOutletContext } from "react-router";
 import ShelfItem from "./ShelfItem";
 
 export default function Shelf() {
-  const [activeSection, products, updateCount, , setLine] = useOutletContext();
+  const { activeSection, products, updateCount, setLine } = useOutletContext();
   return (
     <>
       {activeSection ? (
