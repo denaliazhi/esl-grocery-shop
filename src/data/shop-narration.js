@@ -26,9 +26,7 @@ export default function interpret(e, cart, products) {
     // Clicked on a product edit-button (Add, Remove, or Number Picker)
     e.target === "product"
   ) {
-    console.log(e);
-    let product = products[e.section].find((item) => item.id === e.id);
-    console.log(product);
+    let product = products[e.section].find((item) => item.id === e.id); // TO DO: move logic to useEffect
     let unit = product.speechUnit;
 
     if (product.count === 1) {
@@ -57,10 +55,15 @@ export default function interpret(e, cart, products) {
       cart.count === 1 ? "" : "s"
     } in my cart.`;
   } else if (
-    // Hover over checkout button
+    // Hover over checkout button, items in cart
     e.target === "pre-checkout"
   ) {
     return "Should I checkout now?";
+  } else if (
+    // Hover over checkout button, no items in cart
+    e.target === "no-checkout"
+  ) {
+    return "I don't have anything to checkout.";
   } else if (
     // Clicked checkout button
     e.target === "post-checkout"

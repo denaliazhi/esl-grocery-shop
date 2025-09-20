@@ -9,58 +9,51 @@ export default function Cart() {
     useOutletContext();
 
   return (
-    <>
-      <div className="cart">
-        <div className="cart-header">
-          <Link to={`/${activeSection}`}>{"<"} Back to store</Link>
-          <div>
-            <h2>Cart</h2>
-            <p>{`(${cart.count} item${cart.count === 1 ? "" : "s"})`}</p>
-          </div>
-          {cart.count === 0 ? (
-            <Link
-              to=""
-              aria-label="Disabled checkout button"
-              className="checkout-btn disabled"
-            >
-              Checkout
-            </Link>
-          ) : (
-            <Link
-              className="checkout-btn"
-              to="/checkout"
-              onMouseOver={() => setLastEvent({ target: "pre-checkout" })}
-              onClick={handleCheckout}
-            >
-              Checkout
-            </Link>
-          )}
+    <div className="cart">
+      <div className="cart-header">
+        <Link to={`/${activeSection}`}>{"<"} Back to store</Link>
+        <div>
+          <h2>Cart</h2>
+          <p>{`(${cart.count} item${cart.count === 1 ? "" : "s"})`}</p>
         </div>
-
-        {cart.count > 0 ? (
-          <>
-            <div className="cart-items">
-              {cart.items.map((item) => (
-                <CartItem item={item} key={item.id} handleClick={updateCount} />
-              ))}
-            </div>
-            <hr />
-            <div className="cart-total">
-              <p>Total</p>
-              <p>{cart.totalCost.toFixed(2)}</p>
-            </div>
-          </>
+        {cart.count === 0 ? (
+          <button
+            className="checkout-btn disabled"
+            onMouseOver={() => setLastEvent({ target: "no-checkout" })}
+          >
+            Checkout
+          </button>
         ) : (
-          <>
-            <img
-              src="/icons/cart.png"
-              alt="Empty cart"
-              className="empty-cart"
-            />
-            <p>Your cart is empty.</p>
-          </>
+          <button
+            className="checkout-btn"
+            onMouseOver={() => setLastEvent({ target: "pre-checkout" })}
+          >
+            <Link to="/checkout" onClick={handleCheckout}>
+              Checkout
+            </Link>
+          </button>
         )}
       </div>
-    </>
+
+      {cart.count > 0 ? (
+        <>
+          <div className="cart-items">
+            {cart.items.map((item) => (
+              <CartItem item={item} key={item.id} handleClick={updateCount} />
+            ))}
+          </div>
+          <hr />
+          <div className="cart-total">
+            <p>Total</p>
+            <p>{cart.totalCost.toFixed(2)}</p>
+          </div>
+        </>
+      ) : (
+        <>
+          <img src="/icons/cart.png" alt="Empty cart" className="empty-cart" />
+          <p>Your cart is empty.</p>
+        </>
+      )}
+    </div>
   );
 }

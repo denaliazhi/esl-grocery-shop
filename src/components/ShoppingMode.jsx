@@ -28,9 +28,10 @@ export default function ShoppingMode({ scene, setScene }) {
     for (let section of Object.keys(products)) {
       products[section].forEach((item) => {
         if (item.count > 0) {
+          item.totalCost = item.count * item.unitPrice;
           contents.items.push(item);
           contents.count = contents.count + item.count;
-          contents.totalCost = contents.totalCost + item.count * item.unitPrice;
+          contents.totalCost = contents.totalCost + item.totalCost;
         }
       });
     }

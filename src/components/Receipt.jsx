@@ -1,46 +1,38 @@
 import { useOutletContext } from "react-router";
-import CartItem from "./CartItem";
+import ReceiptItem from "./ReceiptItem";
 
 export default function Receipt() {
-  // const [, products, , cart, setScene, setLastEvent, handleCheckout] =
-  //   useOutletContext();
-
-  const [
-    activeSection,
-    products,
-    updateCount,
-    cart,
-    ,
-    setLastEvent,
-    handleCheckout,
-  ] = useOutletContext();
-
-  let selectedItems = [];
-  for (let section of Object.keys(products)) {
-    selectedItems.push(...products[section].filter((item) => item.count > 0));
-  }
+  const [, , , cart, , setLastEvent] = useOutletContext();
 
   return (
-    <>
-      <div className="cart">
-        <div className="cart-header">
-          <div>
-            <h2>Receipt</h2>
-            <p>{`(${cart.count} item${cart.count === 1 ? "" : "s"})`}</p>
-          </div>
-        </div>
+    <div className="receipt">
+      <div className="receipt-header">
+        <h2>Green Goods</h2>
+        <p>123 Main Street</p>
+        <p>San Francisco, CA</p>
       </div>
 
-      <div className="cart-items">
-        {selectedItems.map((item) => (
-          <CartItem item={item} key={item.id} handleClick={updateCount} />
+      <div className="receipt-items">
+        {cart.items.map((item) => (
+          <ReceiptItem item={item} key={item.id} />
         ))}
       </div>
       <hr />
-      <div className="cart-total">
-        <p>Total</p>
-        <p>{cart.totalCost.toFixed(2)}</p>
+      <div className="receipt-total">
+        <div>
+          <p>Subtotal</p>
+          <p>{cart.totalCost.toFixed(2)}</p>
+        </div>
+        <div>
+          <p>Tax</p>
+          <p>$0.00</p>
+        </div>
+        <div>
+          <p>Total</p>
+          <p>{cart.totalCost.toFixed(2)}</p>
+        </div>
       </div>
-    </>
+      <p>{`# ITEMS SOLD: ${cart.count}`}</p>
+    </div>
   );
 }
