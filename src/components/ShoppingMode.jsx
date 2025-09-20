@@ -16,16 +16,34 @@ import { useState, useEffect } from "react";
 export default function ShoppingMode({ scene, setScene }) {
   const [activeSection, setActiveSection] = useState("");
   const [products, setProducts] = useState(modify(inventory));
-  const [cart, setCart] = useState({
-    count: 0,
-    totalCost: 0,
-  });
+
+  let cart = getCartContents();
+
+  function getCartContents() {
+    let contents = {
+      items: [],
+      count: 0,
+      totalCost: 0,
+    };
+    for (let section of Object.keys(products)) {
+      products[section].forEach((item) => {
+        if (item.count > 0) {
+          contents.items.push(item);
+          contents.count = contents.count + item.count;
+          contents.totalCost = contents.totalCost + item.count * item.unitPrice;
+        }
+      });
+    }
+    return contents;
+  }
+
   const [line, setLine] = useState(main[scene].script[0]);
 
   let background = `url(backgrounds${getImagePath(
     activeSection !== "" ? activeSection : main[scene].background
   )})`;
 
+  /* Determines narration to show on render */
   const [lastEvent, setLastEvent] = useState();
   useEffect(() => {
     let toRead = lastEvent ? interpret(lastEvent, cart, products) : false;
@@ -56,7 +74,6 @@ export default function ShoppingMode({ scene, setScene }) {
   }
 
   /* 
-  Keeps the cart and products states in sync. 
   Called whenever the user modifies an item's count
   by `num` where `num` is 1, -1, or -[item.count].
   */
@@ -66,11 +83,6 @@ export default function ShoppingMode({ scene, setScene }) {
 
     const updatedSection = products[section].map((item) => {
       if (item.id === clicked.id) {
-        // Update state of cart
-        setCart({
-          count: cart.count + num,
-          totalCost: cart.totalCost + num * item.unitPrice,
-        });
         return { ...item, count: item.count + num };
       } else {
         return item;

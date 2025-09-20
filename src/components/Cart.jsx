@@ -5,20 +5,8 @@
 import { Link, useOutletContext } from "react-router";
 import CartItem from "./CartItem";
 export default function Cart() {
-  const [
-    activeSection,
-    products,
-    updateCount,
-    cart,
-    ,
-    setLastEvent,
-    handleCheckout,
-  ] = useOutletContext();
-
-  let selectedItems = [];
-  for (let section of Object.keys(products)) {
-    selectedItems.push(...products[section].filter((item) => item.count > 0));
-  }
+  const [activeSection, , updateCount, cart, , setLastEvent, handleCheckout] =
+    useOutletContext();
 
   return (
     <>
@@ -52,7 +40,7 @@ export default function Cart() {
         {cart.count > 0 ? (
           <>
             <div className="cart-items">
-              {selectedItems.map((item) => (
+              {cart.items.map((item) => (
                 <CartItem item={item} key={item.id} handleClick={updateCount} />
               ))}
             </div>
