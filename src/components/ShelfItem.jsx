@@ -5,7 +5,7 @@ import AddItem from "./AddItem";
 import NumberPicker from "./NumberPicker";
 import { capitalize, getImagePath } from "../utils";
 
-export default function ShelfItem({ item, handleClick, read }) {
+export default function ShelfItem({ item, handleClick }) {
   return (
     <>
       <div
@@ -22,14 +22,10 @@ export default function ShelfItem({ item, handleClick, read }) {
           </div>
         </div>
         {item.count === 0 ? (
-          <AddItem handleClick={handleClick} read={read} />
+          <AddItem handleClick={handleClick} />
         ) : (
           <>
-            <NumberPicker
-              value={item.count}
-              handleClick={handleClick}
-              read={read}
-            />
+            <NumberPicker value={item.count} handleClick={handleClick} />
           </>
         )}
       </div>

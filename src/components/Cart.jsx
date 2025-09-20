@@ -2,16 +2,19 @@
  * This component shows all items in a user's cart and
  * allows the user to modify / remove items before checkout.
  */
-import { Link, useOutletContext } from "react-router";
+import { Link } from "react-router";
 import CartItem from "./CartItem";
-export default function Cart() {
-  const { activeSection, updateCount, cart, setLastEvent, handleCheckout } =
-    useOutletContext();
-
+export default function Cart({
+  updateCount,
+  cart,
+  toggleCart,
+  read,
+  handleCheckout,
+}) {
   return (
     <div className="cart">
       <div className="cart-header">
-        <Link to={`/${activeSection}`}>{"<"} Back to store</Link>
+        <button onClick={() => toggleCart(false)}>{"<"} Back to store</button>
         <div>
           <h2>Cart</h2>
           <p>{`(${cart.count} item${cart.count === 1 ? "" : "s"})`}</p>
@@ -19,14 +22,14 @@ export default function Cart() {
         {cart.count === 0 ? (
           <button
             className="checkout-btn disabled"
-            onMouseOver={() => setLastEvent({ target: "no-checkout" })}
+            onMouseOver={() => read({ target: "no-checkout" })}
           >
             Checkout
           </button>
         ) : (
           <button
             className="checkout-btn"
-            onMouseOver={() => setLastEvent({ target: "pre-checkout" })}
+            onMouseOver={() => read({ target: "pre-checkout" })}
           >
             <Link to="/checkout" onClick={handleCheckout}>
               Checkout

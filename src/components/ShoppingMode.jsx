@@ -2,23 +2,25 @@
  * This component simulates the process
  * of online grocery shopping.
  */
-
 import { getImagePath } from "../utils.js";
 import interpret from "../data/shop-narration.js";
 import main from "../data/lesson-content";
 import inventory from "../data/inventory.js";
 import StoreNav from "./StoreNav.jsx";
 import CartIcon from "./CartIcon.jsx";
+import Cart from "./Cart.jsx";
 import NarrationBar from "./NarrationBar";
-import { Outlet } from "react-router";
+import { Outlet, useParams } from "react-router";
 import { useState, useEffect } from "react";
 
 export default function ShoppingMode({ scene, setScene }) {
-  const [activeSection, setActiveSection] = useState("");
+  const { grocerySection } = useParams();
+  const path = getImagePath(grocerySection ? grocerySection : "parking lot");
+
   const [products, setProducts] = useState(modify(inventory));
 
   let cart = getCartContents();
-
+  console.log(cart);
   function getCartContents() {
     let contents = {
       items: [],
@@ -38,11 +40,9 @@ export default function ShoppingMode({ scene, setScene }) {
     return contents;
   }
 
-  const [line, setLine] = useState(main[scene].script[0]);
+  const [showCart, setShowCart] = useState(false);
 
-  let background = `url(backgrounds${getImagePath(
-    activeSection !== "" ? activeSection : main[scene].background
-  )})`;
+  const [line, setLine] = useState(main[scene].script[0]);
 
   /* Determines narration to show on render */
   const [lastEvent, setLastEvent] = useState();
@@ -64,14 +64,6 @@ export default function ShoppingMode({ scene, setScene }) {
       });
     }
     return modified;
-  }
-
-  /* Changes section of grocery store on display */
-  function select(e) {
-    let selected = e.target.id;
-    setActiveSection(selected);
-    // Trigger narration of this change
-    setLastEvent({ target: "nav-bar", section: selected });
   }
 
   /* 
@@ -99,35 +91,49 @@ export default function ShoppingMode({ scene, setScene }) {
   }
 
   function handleCheckout() {
-    setActiveSection("parking lot");
+    setShowCart(false);
     setLastEvent({ target: "post-checkout" });
   }
 
   return (
-    <div className="viewer" style={{ backgroundImage: background }}>
+    <div
+      className="viewer"
+      style={{ backgroundImage: `url(backgrounds${path}` }}
+    >
       <div className="virtual-store">
-        {activeSection !== "parking lot" && (
+        {grocerySection && (
           <StoreNav
             allSections={Object.keys(inventory)}
-            selected={activeSection}
-            handleClick={select}
+            selected={grocerySection}
+            read={setLastEvent}
           />
         )}
-        <Outlet
-          context={{
-            activeSection,
-            products,
-            updateCount,
-            cart,
-            setScene,
-            setLastEvent,
-            handleCheckout,
-          }}
-        />
-        {activeSection !== "parking lot" && (
+        {showCart ? (
+          <Cart
+            updateCount={updateCount}
+            cart={cart}
+            toggleCart={setShowCart}
+            read={setLastEvent}
+            handleCheckout={handleCheckout}
+          />
+        ) : (
+          grocerySection !== "lobby" && (
+            <Outlet
+              context={{
+                grocerySection,
+                products,
+                cart,
+                updateCount,
+                setLastEvent,
+              }}
+            />
+          )
+        )}
+        {grocerySection && (
           <CartIcon
             data={cart}
-            handleClick={() => setLastEvent({ target: "cart" })}
+            handleClick={setShowCart}
+            read={() => setLastEvent({ target: "cart" })}
           />
         )}
       </div>

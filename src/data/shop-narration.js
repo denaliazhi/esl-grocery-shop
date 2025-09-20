@@ -15,18 +15,18 @@ const overviews = {
     "I'm in the frozen foods section. Frozen food lasts a very long time.",
 };
 
-export default function interpret(e, cart) {
+export default function interpret(e, cart, products) {
   if (
     // Clicked on section link in store nav
     e.target === "nav-bar"
   ) {
-    let section = e.section.toLowerCase().replace(" ", "_");
-    return overviews[section];
+    return overviews[e.section];
   } else if (
     // Clicked on a product edit-button (Add, Remove, or Number Picker)
     e.target === "product"
   ) {
-    let product = cart.items.find((item) => item.id === e.id);
+    // Search all products for item because item could have been removed from cart
+    let product = products[e.section].find((item) => item.id === e.id);
     let unit = product.speechUnit;
 
     if (product.count === 1) {

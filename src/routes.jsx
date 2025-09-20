@@ -1,5 +1,4 @@
 import App from "./App";
-import Cart from "./components/Cart";
 import Shelf from "./components/Shelf";
 import Receipt from "./components/Receipt";
 
@@ -9,12 +8,8 @@ const routes = [
     element: <App />,
     children: [
       {
-        path: "/:section",
+        path: "/:grocerySection",
         element: <Shelf />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
       },
       {
         path: "/checkout",

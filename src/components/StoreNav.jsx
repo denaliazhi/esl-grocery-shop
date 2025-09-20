@@ -5,7 +5,7 @@
 import { capitalize } from "../utils";
 import { Link } from "react-router";
 
-export default function StoreNav({ allSections, selected, handleClick }) {
+export default function StoreNav({ allSections, selected, read }) {
   return (
     <ul className="store-nav">
       {allSections.map((section) => {
@@ -14,7 +14,16 @@ export default function StoreNav({ allSections, selected, handleClick }) {
             key={section}
             className={section === selected ? "selected" : null}
           >
-            <Link to={`/${section}`} id={section} onClick={handleClick}>
+            <Link
+              to={`/${section}`}
+              id={section}
+              onClick={() =>
+                read({
+                  target: "nav-bar",
+                  section: selected,
+                })
+              }
+            >
               {capitalize(section)}
             </Link>
           </li>

@@ -1,5 +1,5 @@
 /**
- * This component renders products for the selected activeSection
+ * This component renders products for the selected section
  * of the grocery store.
  */
 
@@ -7,18 +7,13 @@ import { useOutletContext } from "react-router";
 import ShelfItem from "./ShelfItem";
 
 export default function Shelf() {
-  const { activeSection, products, updateCount, setLine } = useOutletContext();
+  const { grocerySection, products, updateCount } = useOutletContext();
   return (
     <>
-      {activeSection ? (
+      {grocerySection ? (
         <div className="shelf">
-          {products[activeSection].map((item) => (
-            <ShelfItem
-              key={item.id}
-              item={item}
-              handleClick={updateCount}
-              read={setLine}
-            />
+          {products[grocerySection].map((item) => (
+            <ShelfItem key={item.id} item={item} handleClick={updateCount} />
           ))}
         </div>
       ) : null}

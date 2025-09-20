@@ -5,8 +5,10 @@
 import NarrationBar from "./NarrationBar";
 import main from "../data/lesson-content";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function TutorialMode({ scene, setScene }) {
+  const navigate = useNavigate();
   // Track current line in scene
   const [lineIndex, setLineIndex] = useState(0);
   let line = main[scene].script[lineIndex];
@@ -16,6 +18,7 @@ export default function TutorialMode({ scene, setScene }) {
       setLineIndex(lineIndex + 1);
     } else if (scene === "intro") {
       setScene("shopping");
+      navigate("/lobby");
     } else {
       // TO DO: trigger end screen
       return;

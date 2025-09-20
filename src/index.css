@@ -12,7 +12,8 @@
   --light-grey: rgb(217, 217, 217);
   --dark-grey: rgb(100, 100, 100);
   --translucent-white: rgba(255, 255, 255, 0.9);
-  --accent: rgb(189, 208, 220);
+  --accent: rgb(184, 200, 179);
+  --dark-accent: rgb(77 102 76);
 }
 
 body {
@@ -33,11 +34,9 @@ a:active {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
 button {
+  font-family: system-ui, Arial, sans-serif;
+
   padding: 0.25rem 0.5rem;
   border: none;
   border-radius: var(--less-rounded);
@@ -96,6 +95,8 @@ header p {
   flex-direction: column;
   gap: 2rem;
   justify-content: space-between;
+
+  transition: background-image 100ms ease-in-out;
 }
 
 .narration-bar {
@@ -109,6 +110,42 @@ header p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.narration-bar button {
+  padding-right: 1.5rem;
+  border: 1px solid black;
+  border-radius: var(--rounded);
+  background-color: transparent;
+}
+
+.narration-bar button:hover {
+  text-shadow: 0 0 1px black;
+}
+
+.narration-bar button::after {
+  content: ">";
+  margin: 0 0.4rem;
+  position: absolute;
+  animation: slide 2s infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: 0;
+  }
+  35% {
+    transform: translateX(50%);
+  }
+  50% {
+    transform: translateX(20%);
+  }
+  65% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: 0;
+  }
 }
 
 /* Virtual Store and Child Components */
@@ -134,9 +171,17 @@ header p {
   list-style: none;
 }
 
+.store-nav li:not(.selected):hover {
+  background-color: var(--accent);
+}
+
 .selected {
   font-weight: bold;
-  background-color: var(--accent);
+  background-color: var(--dark-accent);
+}
+
+.selected a {
+  color: white;
 }
 
 /* Cart */
@@ -145,14 +190,21 @@ header p {
   height: min-content;
   padding: 0.5rem 1rem;
   border-radius: var(--less-rounded);
+  border: 2px solid transparent;
 
   display: flex;
   gap: 0.5rem;
   align-items: center;
+
+  transition: border ease-in-out 100ms;
 }
 
 .cart-btn img {
   width: 1.2rem;
+}
+
+.cart-btn:hover {
+  border: 2px solid var(--dark-accent);
 }
 
 /* Shelf and Shelf Items */
@@ -209,12 +261,19 @@ header p {
 
 .edit-item-btn {
   border-radius: var(--less-rounded);
+  border: 2px solid transparent;
+
+  background-color: var(--accent);
 
   display: flex;
   gap: 0.2rem;
   align-items: center;
 
-  background-color: var(--accent);
+  transition: border ease-in-out 100ms;
+}
+
+.edit-item-btn:hover {
+  border: 2px solid var(--dark-accent);
 }
 
 .shelf .edit-item-btn {
@@ -249,14 +308,25 @@ header p {
   justify-content: space-between;
 }
 
+.cart-header > button:first-of-type {
+  background-color: transparent;
+  align-self: flex-start;
+}
+
 .checkout-btn {
   height: min-content;
   padding: 0.5rem 0.75rem;
   border-radius: var(--less-rounded);
+  border: 2px solid transparent;
   background-color: rgb(182, 196, 161);
+  transition: border ease-in-out 100ms;
 }
 
-.cart-header > .disabled {
+.checkout-btn:not(.disabled):hover {
+  border: 2px solid var(--dark-accent);
+}
+
+.checkout-btn.disabled {
   color: var(--dark-grey);
   background-color: var(--light-grey);
   cursor: not-allowed;
@@ -394,5 +464,11 @@ header p {
 }
 
 .receipt > p:last-of-type {
-  margin-top: 1rem;
+  margin-top: auto;
+}
+
+.receipt-items > div:hover,
+.receipt-header > h2:hover,
+.receipt-total > div:last-of-type:hover {
+  cursor: pointer;
 }
