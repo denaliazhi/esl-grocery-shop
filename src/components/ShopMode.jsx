@@ -5,16 +5,15 @@
 import { getImagePath } from "../utils.js";
 import interpret from "../data/shop-narration.js";
 import inventory from "../data/inventory.js";
-import StoreNav from "./StoreNav.jsx";
+import ShopNav from "./ShopNav.jsx";
 import CartIcon from "./CartIcon.jsx";
 import Cart from "./Cart.jsx";
-import NarrationBar from "./NarrationBar";
+import NarrationBar from "./NarrationBar.jsx";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
-export default function Store() {
+export default function ShopMode() {
   const grocerySection = useLocation().pathname.slice(1);
-  console.log(grocerySection);
   const path = getImagePath("backgrounds", grocerySection);
 
   const [products, setProducts] = useState(modify(inventory));
@@ -101,7 +100,7 @@ export default function Store() {
     <div className="viewer" style={{ backgroundImage: `url(${path})` }}>
       <div className="virtual-store">
         {grocerySection !== "checkout" && (
-          <StoreNav
+          <ShopNav
             allSections={Object.keys(inventory)}
             selected={grocerySection}
             read={setLastEvent}

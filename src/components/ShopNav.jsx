@@ -5,9 +5,9 @@
 import { capitalize } from "../utils";
 import { Link } from "react-router";
 
-export default function StoreNav({ allSections, selected, read }) {
+export default function ShopNav({ allSections, selected, read }) {
   return (
-    <ul className="store-nav">
+    <ul className="shop-nav">
       {allSections.map((section) => {
         return (
           <li

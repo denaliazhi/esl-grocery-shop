@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import { useLocation, useParams } from "react-router";
 import { getImagePath } from "./utils";
 import { images, script } from "./data/lesson-content";
-import Guide from "./components/Guide";
-import Store from "./components/Store";
-import TabGroup from "./components/TabGroup";
+import StoryMode from "./components/StoryMode";
+import ShopMode from "./components/ShopMode";
+import LessonGuide from "./components/LessonGuide";
 
 export default function App() {
   const location = useLocation().pathname;
@@ -28,13 +28,13 @@ export default function App() {
       <div>
         <h1>Grocery Shopping</h1>
         {location === "/" ? (
-          <Guide setting="storefront" script={script.intro} next="lobby" />
+          <StoryMode setting="storefront" script={script.intro} next="lobby" />
         ) : location === "/end" ? (
-          <Guide setting="checkout" script={script.end} next="" />
+          <StoryMode setting="checkout" script={script.end} next="" />
         ) : (
-          <Store />
+          <ShopMode />
         )}
-        <TabGroup />
+        <LessonGuide />
       </div>
     </>
   );

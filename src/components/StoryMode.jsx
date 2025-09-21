@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import NarrationBar from "./NarrationBar";
 
-export default function Guide({ setting, script, next }) {
+export default function StoryMode({ setting, script, next }) {
   const navigate = useNavigate();
 
   const [lineIndex, setLineIndex] = useState(0);

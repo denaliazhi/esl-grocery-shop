@@ -5,10 +5,12 @@
 }
 
 :root {
+  font-size: 0.75rem;
   font-family: system-ui, Arial, sans-serif;
 
   --rounded: 0.7rem;
   --less-rounded: 0.3rem;
+  --lighter-grey: rgb(241, 241, 241);
   --light-grey: rgb(217, 217, 217);
   --dark-grey: rgb(100, 100, 100);
   --translucent-white: rgba(255, 255, 255, 0.9);
@@ -17,8 +19,8 @@
 }
 
 body {
-  font-size: 0.9rem;
   min-height: 100vh;
+  background-color: var(--lighter-grey);
 
   display: flex;
   flex-direction: column;
@@ -35,6 +37,7 @@ a:active {
 }
 
 button {
+  font-size: 1em;
   font-family: system-ui, Arial, sans-serif;
 
   padding: 0.25rem 0.5rem;
@@ -54,7 +57,7 @@ hr {
 }
 
 .narration-bar,
-.store-nav,
+.shop-nav,
 .shelf-item,
 .cart-btn,
 .cart {
@@ -81,19 +84,20 @@ header p {
 }
 
 #app {
-  transform: scale(90%);
+  width: 60rem;
+  margin: 1.5rem 0;
 }
 
 footer {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   text-align: right;
   width: 100%;
   padding: 1rem 1rem;
 }
+
 /* Viewer and Narration Bar */
 
 .viewer {
-  width: 60rem;
   height: 34rem;
   padding: 1rem;
   border-radius: var(--rounded);
@@ -167,7 +171,7 @@ footer {
 
 /* Store Nav  */
 
-.store-nav {
+.shop-nav {
   height: min-content;
   padding: 1rem;
   border-radius: var(--rounded);
@@ -176,12 +180,12 @@ footer {
   flex-direction: column;
 }
 
-.store-nav li {
+.shop-nav li {
   padding: 0.2rem 0.5rem;
   list-style: none;
 }
 
-.store-nav li:not(.selected):hover {
+.shop-nav li:not(.selected):hover {
   background-color: var(--accent);
 }
 
@@ -484,6 +488,70 @@ footer {
   cursor: pointer;
 }
 
-/* Footer */
-footer {
+/* Lesson Guide and Tabs */
+
+.lesson-guide {
+  margin-top: 1.5rem;
+
+  position: relative;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.tabs > li {
+  opacity: 0.5;
+  list-style: none;
+  padding: 0.5rem 1rem 0.7rem;
+
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.tabs > li img {
+  width: 1.2rem;
+  height: auto;
+}
+
+li.tab-selected {
+  opacity: 1;
+  font-weight: bold;
+  background-color: white;
+  border: 1px solid black;
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
+  border-bottom: none;
+  margin-bottom: -0.17rem;
+}
+
+.tab-contents {
+  padding: 1.5rem 1rem 2rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: var(--rounded);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tab-section h3 {
+  padding: 0.25rem 1.5rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--lighter-grey);
+  border-radius: var(--less-rounded);
+}
+
+.tab-section p {
+  padding: 0.25rem 1.5rem;
+}
+
+.tab-section li {
+  list-style-position: inside;
+  padding: 0 1.5rem;
 }
