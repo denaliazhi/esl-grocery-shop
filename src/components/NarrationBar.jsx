@@ -2,11 +2,11 @@
  * This component displays narrative text.
  */
 
-export default function NarrationBar({ text, showNext, handleClick }) {
+export default function NarrationBar({ text, enableNext, handleClick }) {
   return (
     <div className="narration-bar">
       <p>{text}</p>
-      {showNext && <button onClick={handleClick}>Next</button>}
+      {enableNext && <button onClick={handleClick}>Next</button>}
     </div>
   );
 }

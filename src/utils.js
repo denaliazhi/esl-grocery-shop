@@ -16,8 +16,8 @@ function getArticle(noun) {
 }
 
 // Format path to image
-function getImagePath(name) {
-  return `/${name.replace(/ |_/, "-")}.png`;
+function getImagePath(prefix, name) {
+  return `${prefix}/${name.replace(/ |_/, "-")}.png`;
 }
 
 export { capitalize, getArticle, getImagePath };

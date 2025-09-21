@@ -20,7 +20,6 @@ export default function StoreNav({ allSections, selected, read }) {
               onClick={() =>
                 read({
                   target: "nav-bar",
-                  section: selected,
                 })
               }
             >

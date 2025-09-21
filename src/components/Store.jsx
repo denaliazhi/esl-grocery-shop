@@ -4,23 +4,22 @@
  */
 import { getImagePath } from "../utils.js";
 import interpret from "../data/shop-narration.js";
-import main from "../data/lesson-content";
 import inventory from "../data/inventory.js";
 import StoreNav from "./StoreNav.jsx";
 import CartIcon from "./CartIcon.jsx";
 import Cart from "./Cart.jsx";
 import NarrationBar from "./NarrationBar";
-import { Outlet, useParams } from "react-router";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
-export default function ShoppingMode({ scene, setScene }) {
-  const { grocerySection } = useParams();
-  const path = getImagePath(grocerySection ? grocerySection : "parking lot");
+export default function Store() {
+  const grocerySection = useLocation().pathname.slice(1);
+  console.log(grocerySection);
+  const path = getImagePath("backgrounds", grocerySection);
 
   const [products, setProducts] = useState(modify(inventory));
 
   let cart = getCartContents();
-  console.log(cart);
   function getCartContents() {
     let contents = {
       items: [],
@@ -42,12 +41,14 @@ export default function ShoppingMode({ scene, setScene }) {
 
   const [showCart, setShowCart] = useState(false);
 
-  const [line, setLine] = useState(main[scene].script[0]);
+  const [line, setLine] = useState("Where will I go first?");
 
   /* Determines narration to show on render */
   const [lastEvent, setLastEvent] = useState();
   useEffect(() => {
-    let toRead = lastEvent ? interpret(lastEvent, cart, products) : false;
+    let toRead = lastEvent
+      ? interpret(lastEvent, grocerySection, cart, products)
+      : false;
     if (toRead) {
       setLine(toRead);
     }
@@ -95,13 +96,11 @@ export default function ShoppingMode({ scene, setScene }) {
     setLastEvent({ target: "post-checkout" });
   }
 
+  const navigate = useNavigate();
   return (
-    <div
-      className="viewer"
-      style={{ backgroundImage: `url(backgrounds${path}` }}
-    >
+    <div className="viewer" style={{ backgroundImage: `url(${path})` }}>
       <div className="virtual-store">
-        {grocerySection && (
+        {grocerySection !== "checkout" && (
           <StoreNav
             allSections={Object.keys(inventory)}
             selected={grocerySection}
@@ -129,7 +128,7 @@ export default function ShoppingMode({ scene, setScene }) {
             />
           )
         )}
-        {grocerySection && (
+        {grocerySection !== "checkout" && (
           <CartIcon
             data={cart}
             handleClick={setShowCart}
@@ -137,7 +136,13 @@ export default function ShoppingMode({ scene, setScene }) {
           />
         )}
       </div>
-      <NarrationBar text={line} mode={scene.mode}></NarrationBar>
+      <NarrationBar
+        text={line}
+        enableNext={grocerySection === "checkout"}
+        handleClick={() => {
+          navigate("/end");
+        }}
+      ></NarrationBar>
     </div>
   );
 }

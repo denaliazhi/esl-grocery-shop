@@ -13,7 +13,7 @@ export default function ShelfItem({ item, handleClick }) {
         id={item.id}
         data-section={item.section}
       >
-        <img src={getImagePath(item.name)} alt="" width="100" />
+        <img src={getImagePath("", item.name)} alt="" width="100" />
         <div className="item-label">
           <h3>{capitalize(item.name)}</h3>
           <div className="item-price">

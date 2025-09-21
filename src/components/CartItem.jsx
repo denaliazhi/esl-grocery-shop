@@ -8,7 +8,7 @@ import { capitalize, getImagePath } from "../utils.js";
 export default function CartItem({ item, handleClick }) {
   return (
     <div className="product cart-item" id={item.id} data-section={item.section}>
-      <img src={getImagePath(item.name)} alt="" width="50" />
+      <img src={getImagePath("", item.name)} alt="" width="50" />
       <div>
         <p>{capitalize(item.name)},</p>
         <p>

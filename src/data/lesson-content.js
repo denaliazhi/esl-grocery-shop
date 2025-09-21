@@ -1,19 +1,17 @@
-const main = {
-  intro: {
-    name: "intro",
-    background: "storefront",
-    script: ["I'm at Green Goods.", "I'm grocery shopping."],
-  },
-  shopping: {
-    name: "shopping",
-    background: "lobby",
-    script: ["Where will I go first?"],
-  },
-  checkout: {
-    name: "checkout",
-    background: "parking-lot",
-    script: ["I finished shopping. I'll go home now."],
-  },
+const images = [
+  "storefront",
+  "lobby",
+  "parking-lot",
+  "produce",
+  "bakery",
+  "dairy",
+  "meat",
+  "frozen-foods",
+];
+
+const script = {
+  intro: ["I'm at Green Goods.", "I'm grocery shopping."],
+  end: ["I'm finished shopping. I'll go home now.", "This lesson is over."],
 };
 
-export default main;
+export { images, script };

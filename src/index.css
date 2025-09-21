@@ -75,11 +75,21 @@ header p {
   color: var(--dark-grey);
 }
 
-#app > div > h1 {
+#app h1 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
+#app {
+  transform: scale(90%);
+}
+
+footer {
+  font-size: 0.8rem;
+  text-align: right;
+  width: 100%;
+  padding: 1rem 1rem;
+}
 /* Viewer and Narration Bar */
 
 .viewer {
@@ -420,7 +430,8 @@ header p {
 .receipt {
   text-align: center;
   width: 18rem;
-  height: 25rem;
+  height: max-content;
+  max-height: 24rem;
   padding: 1rem 1rem 1rem 1.75rem;
   margin: 2rem auto 0;
   border-radius: var(--rounded);
@@ -471,4 +482,8 @@ header p {
 .receipt-header > h2:hover,
 .receipt-total > div:last-of-type:hover {
   cursor: pointer;
+}
+
+/* Footer */
+footer {
 }

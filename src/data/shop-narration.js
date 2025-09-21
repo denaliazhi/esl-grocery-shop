@@ -15,37 +15,39 @@ const overviews = {
     "I'm in the frozen foods section. Frozen food lasts a very long time.",
 };
 
-export default function interpret(e, cart, products) {
+export default function interpret(e, section, cart, products) {
   if (
     // Clicked on section link in store nav
     e.target === "nav-bar"
   ) {
-    return overviews[e.section];
+    return overviews[section];
   } else if (
     // Clicked on a product edit-button (Add, Remove, or Number Picker)
     e.target === "product"
   ) {
     // Search all products for item because item could have been removed from cart
     let product = products[e.section].find((item) => item.id === e.id);
-    let unit = product.speechUnit;
+    if (product) {
+      let unit = product.speechUnit;
 
-    if (product.count === 1) {
-      // Either "a [unit] of" or just "a/an"
-      return `I will buy ${
-        unit !== ""
-          ? getArticle(unit) + " " + unit + " of"
-          : getArticle(product.name)
-      } ${product.name}.`;
-    } else if (product.count > 1) {
-      return `I will buy ${product.count} ${
-        unit !== ""
-          ? pluralize(unit) + ` of ${product.name}.`
-          : isPlural(product.name)
-          ? product.name
-          : pluralize(product.name) + "."
-      }`;
-    } else {
-      return `I will not buy the ${product.name}. I removed it from my cart.`;
+      if (product.count === 1) {
+        // Either "a [unit] of" or just "a/an"
+        return `I will buy ${
+          unit !== ""
+            ? getArticle(unit) + " " + unit + " of"
+            : getArticle(product.name)
+        } ${product.name}.`;
+      } else if (product.count > 1) {
+        return `I will buy ${product.count} ${
+          unit !== ""
+            ? pluralize(unit) + ` of ${product.name}.`
+            : isPlural(product.name)
+            ? product.name
+            : pluralize(product.name) + "."
+        }`;
+      } else {
+        return `I will not buy the ${product.name}. I removed it from my cart.`;
+      }
     }
   } else if (
     // Hover over or clicked on cart icon
@@ -90,17 +92,18 @@ export default function interpret(e, cart, products) {
     } else if (product.count > 1) {
       return `I bought ${product.count} ${
         unit !== ""
-          ? pluralize(unit) + ` of ${product.name}.`
+          ? pluralize(unit) +
+            ` of ${product.name} for $${product.totalCost.toFixed(2)}.`
           : isPlural(product.name)
           ? product.name
-          : pluralize(product.name) + ` for $${product.totalCost}.`
+          : pluralize(product.name) + ` for $${product.totalCost.toFixed(2)}.`
       }`;
     }
   } else if (
     // Hovered over receipt total
     e.target === "receipt-total"
   ) {
-    return `I spent $${cart.totalCost} on groceries.`;
+    return `I spent $${cart.totalCost.toFixed(2)} on groceries.`;
   }
   return false;
 }
