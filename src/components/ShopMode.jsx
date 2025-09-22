@@ -13,6 +13,8 @@ import { Outlet, useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
 export default function ShopMode() {
+  const [animate, setAnimate] = useState({ cart: "highlight" });
+
   const grocerySection = useLocation().pathname.slice(1);
   const path = getImagePath("backgrounds", grocerySection);
 
@@ -44,14 +46,18 @@ export default function ShopMode() {
 
   /* Determines narration to show on render */
   const [lastEvent, setLastEvent] = useState();
+
   useEffect(() => {
     let toRead = lastEvent
       ? interpret(lastEvent, grocerySection, cart, products)
       : false;
-    if (toRead) {
-      setLine(toRead);
-    }
+    toRead && setLine(toRead);
   }, [lastEvent]);
+
+  useEffect(() => {
+    let toRead = interpret({ target: "nav-bar" }, grocerySection);
+    toRead && setLine(toRead);
+  }, [grocerySection]);
 
   /* Adds data fields to each product in inventory */
   function modify(original) {
@@ -88,11 +94,27 @@ export default function ShopMode() {
     });
     // Trigger narration of this change
     setLastEvent({ target: "product", section: section, id: clicked.id });
+
+    // Trigger button animation
+    if (num === 1) {
+      setAnimate({ ...animate, cart: "stretch" });
+      setTimeout(() => setAnimate({ ...animate, cart: false }), 300);
+    } else {
+      setAnimate({ ...animate, cart: "squeeze" });
+      setTimeout(() => setAnimate({ ...animate, cart: false }), 300);
+    }
   }
 
   function handleCheckout() {
     setShowCart(false);
     setLastEvent({ target: "post-checkout" });
+  }
+
+  function handleCartClick() {
+    if (animate.cart === "highlight") {
+      setAnimate({ ...animate, cart: false });
+    }
+    setShowCart(!showCart);
   }
 
   const navigate = useNavigate();
@@ -103,7 +125,6 @@ export default function ShopMode() {
           <ShopNav
             allSections={Object.keys(inventory)}
             selected={grocerySection}
-            read={setLastEvent}
           />
         )}
         {showCart ? (
@@ -130,8 +151,9 @@ export default function ShopMode() {
         {grocerySection !== "checkout" && (
           <CartIcon
             data={cart}
-            handleClick={setShowCart}
+            handleClick={handleCartClick}
             read={() => setLastEvent({ target: "cart" })}
+            animate={animate.cart}
           />
         )}
       </div>

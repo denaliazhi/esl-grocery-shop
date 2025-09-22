@@ -7,7 +7,7 @@ export default function Tab({ isFirst, contents }) {
         {list.length > 1 && (
           <ul>
             {list.slice(1).map((item) => (
-              <li>{item}</li>
+              <li key={item}>{item}</li>
             ))}
           </ul>
         )}

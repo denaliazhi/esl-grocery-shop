@@ -6,7 +6,11 @@ export default function NarrationBar({ text, enableNext, handleClick }) {
   return (
     <div className="narration-bar">
       <p>{text}</p>
-      {enableNext && <button onClick={handleClick}>Next</button>}
+      {enableNext && (
+        <button onClick={handleClick} style={{ animationName: "poke" }}>
+          Next
+        </button>
+      )}
     </div>
   );
 }

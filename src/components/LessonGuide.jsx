@@ -6,8 +6,17 @@ import { capitalize, getImagePath } from "../utils";
 export default function LessonGuide() {
   const options = Object.keys(tabs);
   const [selected, setSelected] = useState(options[0]);
+  let index = options.indexOf(selected);
+
+  const [slide, setSlide] = useState("slideRight");
 
   function select(tab) {
+    let newIndex = options.indexOf(tab);
+    if (newIndex > index) {
+      setSlide("slideRight");
+    } else {
+      setSlide("slideLeft");
+    }
     setSelected(tab);
   }
 
@@ -22,7 +31,10 @@ export default function LessonGuide() {
               onClick={() => select(option)}
             >
               <img src={getImagePath("icons/", `${option} icon`)} />
-              {capitalize(option)}
+              <p>{capitalize(option)}</p>
+              <span
+                style={option === selected ? { animationName: slide } : null}
+              ></span>
             </li>
           ))}
         </ul>

@@ -3,17 +3,24 @@
  * When clicked, it shows the cart details.
  */
 
-export default function CartIcon({ data, handleClick, read }) {
+export default function CartIcon({ data, handleClick, read, animate }) {
   return (
     <>
       <button
-        className="cart-btn"
+        className={
+          animate === "highlight" ? "cart-btn highlighted" : "cart-btn"
+        }
         aria-label="View cart"
         onClick={() => {
-          handleClick(true);
+          handleClick();
           read();
         }}
         onMouseOver={read}
+        style={
+          animate === "stretch" || animate === "squeeze"
+            ? { animationName: animate }
+            : null
+        }
       >
         <img src="/icons/cart-icon.png" alt="Cart icon" />
         {data.count}

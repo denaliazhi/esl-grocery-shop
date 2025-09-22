@@ -70,7 +70,7 @@ export default function interpret(e, section, cart, products) {
     // Clicked checkout button
     e.target === "post-checkout"
   ) {
-    return "I checked out. Here's my receipt.";
+    return "I checked out. This is my receipt.";
   } else if (
     // Hovered over receipt header
     e.target === "receipt-header"

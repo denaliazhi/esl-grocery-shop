@@ -48,7 +48,7 @@ export default function Cart({
           <hr />
           <div className="cart-total">
             <p>Total</p>
-            <p>{cart.totalCost.toFixed(2)}</p>
+            <p>${cart.totalCost.toFixed(2)}</p>
           </div>
         </>
       ) : (
