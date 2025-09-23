@@ -107,12 +107,12 @@ hr {
 }
 @keyframes slideRight {
   0% {
-    transform: translateX(-90%);
+    transform: translateX(-100%);
   }
 }
 @keyframes slideLeft {
   0% {
-    transform: translateX(90%);
+    transform: translateX(100%);
   }
 }
 @keyframes poke {
@@ -213,6 +213,67 @@ footer {
   padding-left: 0.3rem;
   margin: auto;
   position: absolute;
+}
+
+/* Dialog  */
+
+h1 + div {
+  z-index: 2;
+  width: 60rem;
+  height: 34rem;
+  padding: 1rem;
+  border-radius: var(--rounded);
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(7px);
+  position: absolute;
+}
+
+.help-btn {
+  color: white;
+
+  position: absolute;
+  bottom: 3rem;
+  margin-left: 1rem;
+}
+
+dialog {
+  color: white;
+  text-align: center;
+
+  width: 32rem;
+  padding: 2rem 4rem;
+  margin: auto;
+
+  border: none;
+  border-radius: var(--rounded);
+  background-color: transparent;
+
+  top: 9rem;
+  position: relative;
+}
+
+dialog h3,
+dialog p {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+dialog ol {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+dialog button {
+  color: white;
+  height: min-content;
+  padding: 0.4rem 1.2rem;
+  margin-top: 2.4rem;
+  border: 1px solid white;
+  border-radius: var(--rounded);
+}
+
+dialog button:hover {
+  transform: scale(110%);
 }
 
 /* Virtual Store and Child Components */

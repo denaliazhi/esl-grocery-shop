@@ -18,23 +18,30 @@ const tabs = {
   overview: [
     {
       heading: "Topic",
-      content: "In this lesson, the student will go grocery shopping.",
+      content:
+        "In this lesson, students will simulate a grocery shopping experience.",
     },
     {
-      heading: "Objective",
-      content: `The student will learn to
+      heading: "Concepts",
+      content: `Students will learn to 
   - Identify common sections in the grocery store
-  - Associate items with their units of count / measurement
+  - Associate items with units of count / measurement
   - Describe items in their singular and plural forms
   - Describe shopping in the future and past tense`,
     },
     {
       heading: "Prerequisites",
-      content: `Before this lesson, the student should review
+      content: `Before this lesson, students should be familiar with
   - Simple sentence structure
-  - Simple verb tenses
-  - Question words
-  - Prepositions`,
+  - Pronouns ("I", "my", "it")
+  - Prepositions ("at", "in", "of")
+  - Question words ("Where...?", "Should...?")`,
+    },
+    {
+      heading: "Teaching Notes",
+      content: `
+      - Teachers are encouraged to read the content aloud to help students practice their pronunciation. 
+      - If necessary, students may use their browser's native translation feature to translate the page.`,
     },
   ],
   credits: [
@@ -46,7 +53,7 @@ const tabs = {
     },
     {
       heading: "Creative Commons License",
-      content: `Grocery Shopping © 2025 by Denalia Zhi is licensed under CC BY NC SA 4.0`,
+      content: `Grocery Shopping © 2025 by Denalia Zhi is licensed under CC BY NC SA 4.0.`,
     },
   ],
 };

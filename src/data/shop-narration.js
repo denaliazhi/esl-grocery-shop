@@ -53,6 +53,9 @@ export default function interpret(e, section, cart, products) {
     // Hover over or clicked on cart icon
     e.target === "cart"
   ) {
+    if (cart.count === 0) {
+      return "I don't have anything in my cart.";
+    }
     return `I have ${cart.count} item${
       cart.count === 1 ? "" : "s"
     } in my cart.`;
