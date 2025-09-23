@@ -1,6 +1,6 @@
 /**
  * This file determines the content that should be
- * displayed in the narration bar.
+ * displayed in the narration bar based on the given event.
  */
 
 import { getArticle } from "../utils";
@@ -16,6 +16,7 @@ const overviews = {
 };
 
 export default function interpret(e, section, cart, products) {
+  if (!e) return false;
   if (
     // Clicked on section link in store nav
     e.target === "nav-bar"

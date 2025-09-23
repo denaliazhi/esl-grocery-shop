@@ -3,7 +3,7 @@
  * When clicked, it shows the cart details.
  */
 
-export default function CartIcon({ data, handleClick, read, animate }) {
+export default function CartIcon({ cart, handleClick, handleMouse, animate }) {
   return (
     <>
       <button
@@ -11,11 +11,8 @@ export default function CartIcon({ data, handleClick, read, animate }) {
           animate === "highlight" ? "cart-btn highlighted" : "cart-btn"
         }
         aria-label="View cart"
-        onClick={() => {
-          handleClick();
-          read();
-        }}
-        onMouseOver={read}
+        onClick={handleClick}
+        onMouseOver={() => handleMouse({ target: "cart" })}
         style={
           animate === "stretch" || animate === "squeeze"
             ? { animationName: animate }
@@ -23,7 +20,7 @@ export default function CartIcon({ data, handleClick, read, animate }) {
         }
       >
         <img src="/icons/cart-icon.png" alt="Cart icon" />
-        {data.count}
+        {cart.count}
       </button>
     </>
   );

@@ -201,7 +201,7 @@ footer {
   border-radius: var(--rounded);
   background-color: transparent;
 
-  animation: 2s infinite;
+  animation: poke 2s infinite;
 }
 
 .narration-bar button:hover {
@@ -691,14 +691,14 @@ dialog button:hover {
   margin-top: 1.5rem;
 }
 
-.tabs {
+.tab-nav {
   margin-bottom: -0.15rem;
 
   display: flex;
   gap: 1rem;
 }
 
-.tabs > li {
+.tab-nav > li {
   opacity: 0.5;
   list-style: none;
   padding: 0.5rem 1rem 0.5rem;
@@ -710,7 +710,7 @@ dialog button:hover {
   cursor: pointer;
 }
 
-.tabs > li img {
+.tab-nav > li img {
   width: 1.2rem;
   height: auto;
 }

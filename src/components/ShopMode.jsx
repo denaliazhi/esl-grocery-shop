@@ -1,65 +1,29 @@
 /**
  * This component simulates the process
- * of online grocery shopping.
+ * of shopping in a grocery store.
  */
-import { getImagePath } from "../utils.js";
-import interpret from "../data/shop-narration.js";
-import inventory from "../data/inventory.js";
-import ShopNav from "./ShopNav.jsx";
-import CartIcon from "./CartIcon.jsx";
-import Cart from "./Cart.jsx";
-import NarrationBar from "./NarrationBar.jsx";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
+import { getImagePath } from "../utils.js";
+import interpret from "../data/shop-narration.js";
+import inventory from "../data/inventory.js";
+
+import ShopNav from "./ShopNav.jsx";
+import Cart from "./Cart.jsx";
+import CartIcon from "./CartIcon.jsx";
+import NarrationBar from "./NarrationBar.jsx";
+
 export default function ShopMode() {
-  const [animate, setAnimate] = useState({ cart: "highlight" });
+  const navigate = useNavigate();
 
   const grocerySection = useLocation().pathname.slice(1);
-  const path = getImagePath("backgrounds", grocerySection);
+  const imagePath = getImagePath("backgrounds", grocerySection);
 
-  const [products, setProducts] = useState(modify(inventory));
-
-  let cart = getCartContents();
-  function getCartContents() {
-    let contents = {
-      items: [],
-      count: 0,
-      totalCost: 0,
-    };
-    for (let section of Object.keys(products)) {
-      products[section].forEach((item) => {
-        if (item.count > 0) {
-          item.totalCost = item.count * item.unitPrice;
-          contents.items.push(item);
-          contents.count = contents.count + item.count;
-          contents.totalCost = contents.totalCost + item.totalCost;
-        }
-      });
-    }
-    return contents;
-  }
-
-  const [showCart, setShowCart] = useState(false);
-
-  const [line, setLine] = useState("Where will I go first?");
-
-  /* Determines narration to show on render */
-  const [lastEvent, setLastEvent] = useState();
-
-  useEffect(() => {
-    let toRead = lastEvent
-      ? interpret(lastEvent, grocerySection, cart, products)
-      : false;
-    toRead && setLine(toRead);
-  }, [lastEvent]);
-
-  useEffect(() => {
-    let toRead = interpret({ target: "nav-bar" }, grocerySection);
-    toRead && setLine(toRead);
-  }, [grocerySection]);
-
-  /* Adds data fields to each product in inventory */
+  const [allProducts, setAllProducts] = useState(modify(inventory));
+  /* 
+  Adds data fields to each product from inventory
+  */
   function modify(original) {
     let modified = {};
     for (let key of Object.keys(original)) {
@@ -72,33 +36,95 @@ export default function ShopMode() {
     return modified;
   }
 
+  // Store content of narration bar
+  const [line, setLine] = useState("Where will I go first?");
+
+  // Store last narration-triggering event
+  const [lastEvent, setLastEvent] = useState();
+
+  // Conditionally animate these components
+  const [animate, setAnimate] = useState({
+    cart: "highlight",
+    nav: "highlight",
+  });
+  const [showCart, setShowCart] = useState(false);
+
+  // Derive user's cart contents from the state of all products
+  let cart = getCartContents();
+  function getCartContents() {
+    let contents = {
+      items: [],
+      count: 0,
+      totalCost: 0,
+    };
+    for (let section of Object.keys(allProducts)) {
+      allProducts[section].forEach((item) => {
+        if (item.count > 0) {
+          item.totalCost = item.count * item.unitPrice;
+          contents.items.push(item);
+          contents.count = contents.count + item.count;
+          contents.totalCost = contents.totalCost + item.totalCost;
+        }
+      });
+    }
+    return contents;
+  }
+
   /* 
-  Called whenever the user modifies an item's count
-  by `num` where `num` is 1, -1, or -[item.count].
+  If a narration-triggering event has occurred, 
+  determine line to show in narration bar 
+  */
+  useEffect(() => {
+    let toRead = interpret(lastEvent, grocerySection, cart, allProducts);
+    toRead && setLine(toRead);
+  }, [lastEvent]);
+
+  /* 
+  If user has navigated to a different grocery section,
+  determine line to show in narration bar 
+  */
+  useEffect(() => {
+    let toRead = interpret({ target: "nav-bar" }, grocerySection);
+    toRead && setLine(toRead);
+
+    // Stop highlighting nav bar
+    if (grocerySection !== "lobby") {
+      setAnimate({ ...animate, nav: false });
+    }
+  }, [grocerySection]);
+
+  /* 
+  Called when user modifies an item's count by `num` 
+  where `num` is 1, -1, or -item.count.
   */
   function updateCount(e, num) {
     const clicked = e.target.closest(".product");
     const section = clicked.dataset.section;
 
-    const updatedSection = products[section].map((item) => {
-      if (item.id === clicked.id) {
-        return { ...item, count: item.count + num };
-      } else {
-        return item;
-      }
+    // Update item's count within its grocery section
+    const updatedSection = allProducts[section].map((item) => {
+      return item.id === clicked.id
+        ? { ...item, count: item.count + num }
+        : item;
     });
-    // Update state of products
-    setProducts({
-      ...products,
+    setAllProducts({
+      ...allProducts,
       [section]: updatedSection,
     });
+
     // Trigger narration of this change
     setLastEvent({ target: "product", section: section, id: clicked.id });
 
     // Trigger button animation
-    if (num === 1) {
+    animateCart(num === 1);
+  }
+
+  function animateCart(isAddItem) {
+    // Item being added to cart
+    if (isAddItem) {
       setAnimate({ ...animate, cart: "stretch" });
       setTimeout(() => setAnimate({ ...animate, cart: false }), 300);
+      // Item(s) being removed from cart
     } else {
       setAnimate({ ...animate, cart: "squeeze" });
       setTimeout(() => setAnimate({ ...animate, cart: false }), 300);
@@ -111,36 +137,38 @@ export default function ShopMode() {
   }
 
   function handleCartClick() {
+    // Stop highlighting cart after first click
     if (animate.cart === "highlight") {
       setAnimate({ ...animate, cart: false });
     }
     setShowCart(!showCart);
+    setLastEvent({ target: "cart" });
   }
 
-  const navigate = useNavigate();
   return (
-    <div className="viewer" style={{ backgroundImage: `url(${path})` }}>
+    <div className="viewer" style={{ backgroundImage: `url(${imagePath})` }}>
       <div className="virtual-store">
         {grocerySection !== "checkout" && (
           <ShopNav
-            allSections={Object.keys(inventory)}
+            options={Object.keys(inventory)}
             selected={grocerySection}
+            animate={animate.nav}
           />
         )}
         {showCart ? (
           <Cart
-            updateCount={updateCount}
             cart={cart}
-            toggleCart={setShowCart}
-            read={setLastEvent}
+            handleClose={() => setShowCart(false)}
             handleCheckout={handleCheckout}
+            handleMouse={setLastEvent}
+            updateCount={updateCount}
           />
         ) : (
           grocerySection !== "lobby" && (
             <Outlet
               context={{
                 grocerySection,
-                products,
+                allProducts,
                 cart,
                 updateCount,
                 setLastEvent,
@@ -150,16 +178,16 @@ export default function ShopMode() {
         )}
         {grocerySection !== "checkout" && (
           <CartIcon
-            data={cart}
+            cart={cart}
             handleClick={handleCartClick}
-            read={() => setLastEvent({ target: "cart" })}
+            handleMouse={setLastEvent}
             animate={animate.cart}
           />
         )}
       </div>
       <NarrationBar
         text={line}
-        enableNext={grocerySection === "checkout"}
+        isClickable={grocerySection === "checkout"}
         handleClick={() => {
           navigate("/end");
         }}

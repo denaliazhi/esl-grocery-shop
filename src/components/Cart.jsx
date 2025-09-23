@@ -5,16 +5,16 @@
 import { Link } from "react-router";
 import CartItem from "./CartItem";
 export default function Cart({
-  updateCount,
   cart,
-  toggleCart,
-  read,
+  handleClose,
   handleCheckout,
+  handleMouse,
+  updateCount,
 }) {
   return (
     <div className="cart">
       <div className="cart-header">
-        <button onClick={() => toggleCart(false)}>{"<"} Back to store</button>
+        <button onClick={handleClose}>{"<"} Back to store</button>
         <div>
           <h2>Cart</h2>
           <p>{`(${cart.count} item${cart.count === 1 ? "" : "s"})`}</p>
@@ -22,14 +22,14 @@ export default function Cart({
         {cart.count === 0 ? (
           <button
             className="checkout-btn disabled"
-            onMouseOver={() => read({ target: "no-checkout" })}
+            onMouseOver={() => handleMouse({ target: "no-checkout" })}
           >
             Checkout
           </button>
         ) : (
           <button
             className="checkout-btn"
-            onMouseOver={() => read({ target: "pre-checkout" })}
+            onMouseOver={() => handleMouse({ target: "pre-checkout" })}
           >
             <Link to="/checkout" onClick={handleCheckout}>
               Checkout

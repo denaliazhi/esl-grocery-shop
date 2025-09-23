@@ -28,7 +28,7 @@ export default function StoryMode({ setting, script, next }) {
     >
       <NarrationBar
         text={line}
-        enableNext={true}
+        isClickable={true}
         handleClick={nextLine}
       ></NarrationBar>
     </div>

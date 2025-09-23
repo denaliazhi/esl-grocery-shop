@@ -3,9 +3,9 @@
  */
 import { capitalize } from "../utils.js";
 
-export default function ReceiptItem({ item, read }) {
+export default function ReceiptItem({ item, handleMouse }) {
   return (
-    <div onMouseOver={() => read({ target: "receipt-item", id: item.id })}>
+    <div onMouseOver={handleMouse}>
       <p>{item.count}</p>
       <div>
         <p>{capitalize(item.name)},</p>

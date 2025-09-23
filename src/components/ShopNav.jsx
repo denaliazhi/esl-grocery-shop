@@ -5,17 +5,17 @@
 import { capitalize } from "../utils";
 import { Link } from "react-router";
 
-export default function ShopNav({ allSections, selected }) {
+export default function ShopNav({ options, selected, animate }) {
   return (
-    <ul className={selected === "lobby" ? "shop-nav highlighted" : "shop-nav"}>
-      {allSections.map((section) => {
+    <ul className={animate ? "shop-nav highlighted" : "shop-nav"}>
+      {options.map((options) => {
         return (
           <li
-            key={section}
-            className={section === selected ? "selected" : null}
+            key={options}
+            className={options === selected ? "selected" : null}
           >
-            <Link to={`/${section}`} id={section}>
-              {capitalize(section)}
+            <Link to={`/${options}`} id={options}>
+              {capitalize(options)}
             </Link>
           </li>
         );

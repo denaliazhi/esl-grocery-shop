@@ -9,6 +9,10 @@ import ReceiptItem from "./ReceiptItem";
 export default function Receipt() {
   const { cart, setLastEvent } = useOutletContext();
 
+  function handleMouse(event, itemId) {
+    setLastEvent({ target: event, id: itemId });
+  }
+
   return (
     <>
       <div className="receipt-instruction">
@@ -20,9 +24,7 @@ export default function Receipt() {
       <div className="receipt">
         <div
           className="receipt-header"
-          onMouseOver={() => {
-            setLastEvent({ target: "receipt-header" });
-          }}
+          onMouseOver={() => handleMouse("receipt-header")}
         >
           <h2>Green Goods</h2>
           <p>123 Main Street</p>
@@ -31,7 +33,11 @@ export default function Receipt() {
         <hr />
         <div className="receipt-items">
           {cart.items.map((item) => (
-            <ReceiptItem item={item} key={item.id} read={setLastEvent} />
+            <ReceiptItem
+              key={item.id}
+              item={item}
+              handleMouse={() => handleMouse("receipt-item", item.id)}
+            />
           ))}
         </div>
         <hr />
@@ -44,7 +50,7 @@ export default function Receipt() {
             <p>Tax</p>
             <p>0.00</p>
           </div>
-          <div onMouseOver={() => setLastEvent({ target: "receipt-total" })}>
+          <div onMouseOver={() => handleMouse("receipt-total")}>
             <p>Total</p>
             <p>${cart.totalCost.toFixed(2)}</p>
           </div>

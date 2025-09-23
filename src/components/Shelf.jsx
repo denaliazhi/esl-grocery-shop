@@ -7,12 +7,12 @@ import { useOutletContext } from "react-router";
 import ShelfItem from "./ShelfItem";
 
 export default function Shelf() {
-  const { grocerySection, products, updateCount } = useOutletContext();
+  const { grocerySection, allProducts, updateCount } = useOutletContext();
   return (
     <>
       {grocerySection ? (
         <div className="shelf">
-          {products[grocerySection].map((item) => (
+          {allProducts[grocerySection].map((item) => (
             <ShelfItem key={item.id} item={item} handleClick={updateCount} />
           ))}
         </div>

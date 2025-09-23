@@ -1,12 +1,12 @@
-const images = [
-  "storefront",
-  "lobby",
-  "parking-lot",
-  "produce",
+const backgroundImages = [
   "bakery",
+  "checkout",
   "dairy",
-  "meat",
   "frozen-foods",
+  "lobby",
+  "meat",
+  "produce",
+  "storefront",
 ];
 
 const script = {
@@ -18,8 +18,7 @@ const tabs = {
   overview: [
     {
       heading: "Topic",
-      content:
-        "In this lesson, students will simulate a grocery shopping experience.",
+      content: "This lesson is about grocery shopping.",
     },
     {
       heading: "Concepts",
@@ -40,6 +39,7 @@ const tabs = {
     {
       heading: "Teaching Notes",
       content: `
+      - This lesson is intended for beginner to intermediate ESL students.
       - Teachers are encouraged to read the content aloud to help students practice their pronunciation. 
       - If necessary, students may use their browser's native translation feature to translate the page.`,
     },
@@ -58,4 +58,4 @@ const tabs = {
   ],
 };
 
-export { images, script, tabs };
+export { backgroundImages, script, tabs };

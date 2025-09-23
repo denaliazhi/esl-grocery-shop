@@ -2,15 +2,11 @@
  * This component displays narrative text.
  */
 
-export default function NarrationBar({ text, enableNext, handleClick }) {
+export default function NarrationBar({ text, isClickable, handleClick }) {
   return (
     <div className="narration-bar">
       <p>{text}</p>
-      {enableNext && (
-        <button onClick={handleClick} style={{ animationName: "poke" }}>
-          Next
-        </button>
-      )}
+      {isClickable && <button onClick={handleClick}>Next</button>}
     </div>
   );
 }
