@@ -653,6 +653,7 @@ dialog button:hover {
 }
 
 .receipt {
+  z-index: 3;
   grid-column: 2;
 
   text-align: center;
