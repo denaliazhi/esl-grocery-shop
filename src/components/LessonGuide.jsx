@@ -7,7 +7,7 @@
 import { useState } from "react";
 import { capitalize, getImagePath } from "../utils";
 
-export default function LessonGuide({ tabs }) {
+export default function LessonGuide({ tabs, transcript }) {
   const tabNames = Object.keys(tabs);
   const [selected, setSelected] = useState(tabNames[0]);
   let index = tabNames.indexOf(selected);
@@ -51,12 +51,16 @@ export default function LessonGuide({ tabs }) {
           className="tab-contents"
           style={index === 0 ? { borderTopLeftRadius: 0 } : null}
         >
-          {tabs[selected].map((section) => (
-            <div key={section.heading} className="tab-section">
-              <h3>{section.heading}</h3>
-              {format(section.content)}
-            </div>
-          ))}
+          {selected === "transcript" ? (
+            <pre>{transcript.join("\r\n").trim()}</pre>
+          ) : (
+            tabs[selected].map((section) => (
+              <div key={section.heading} className="tab-section">
+                <h3>{section.heading}</h3>
+                {format(section.content)}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </>

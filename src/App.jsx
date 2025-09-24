@@ -16,6 +16,7 @@ import HelpDialog from "./components/HelpDialog";
 export default function App() {
   const [showDialog, setShowDialog] = useState(true);
   const location = useLocation().pathname;
+  const [transcript, setTranscript] = useState([]);
 
   // Pre-load background images for smooth scene transitions
   useEffect(() => {
@@ -31,6 +32,12 @@ export default function App() {
     setShowDialog(!showDialog);
   }
 
+  function transcribe(line) {
+    if (line !== "" && line !== undefined) {
+      !transcript.includes(line) && setTranscript([...transcript, line]);
+    }
+  }
+
   return (
     <>
       <div>
@@ -41,14 +48,24 @@ export default function App() {
           closeText={location === "/" ? "Start" : "Close"}
         />
         {location === "/" ? (
-          <StoryMode setting="storefront" script={script.intro} next="lobby" />
+          <StoryMode
+            setting="storefront"
+            script={script.intro}
+            next="lobby"
+            transcribe={transcribe}
+          />
         ) : location === "/end" ? (
-          <StoryMode setting="checkout" script={script.end} next="" />
+          <StoryMode
+            setting="checkout"
+            script={script.end}
+            next=""
+            transcribe={transcribe}
+          />
         ) : (
           // If neither start nor end of lesson, then user is "shopping"
-          <ShopMode />
+          <ShopMode transcribe={transcribe} />
         )}
-        <LessonGuide tabs={tabs} />
+        <LessonGuide tabs={tabs} transcript={transcript} />
       </div>
     </>
   );

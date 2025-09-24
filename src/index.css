@@ -808,3 +808,9 @@ li.tab-selected > span {
   list-style-position: inside;
   padding: 0 1.5rem;
 }
+
+.lesson-guide pre {
+  font-family: Figtree;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}

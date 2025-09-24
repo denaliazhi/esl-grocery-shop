@@ -14,7 +14,7 @@ import Cart from "./Cart.jsx";
 import CartIcon from "./CartIcon.jsx";
 import NarrationBar from "./NarrationBar.jsx";
 
-export default function ShopMode() {
+export default function ShopMode({ transcribe }) {
   const navigate = useNavigate();
 
   const grocerySection = useLocation().pathname.slice(1);
@@ -92,6 +92,11 @@ export default function ShopMode() {
       setAnimate({ ...animate, nav: false });
     }
   }, [grocerySection]);
+
+  // If narration bar has changed, transcribe the contents
+  useEffect(() => {
+    transcribe(line);
+  }, [line]);
 
   /* 
   Called when user modifies an item's count by `num` 

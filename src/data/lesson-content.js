@@ -44,6 +44,7 @@ const tabs = {
       - If necessary, students may use their browser's native translation feature to translate the page.`,
     },
   ],
+  transcript: [],
   credits: [
     {
       heading: "External sites",
