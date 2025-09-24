@@ -7,9 +7,9 @@
 export default function HelpDialog({ isOpen, handleClick, closeText }) {
   return (
     <>
-      {isOpen && (
+      {isOpen ? (
         // Wrapper div to dim/blur content behind dialog box
-        <div>
+        <div className="dialog-overlay">
           <dialog open>
             <h3>Introduction</h3>
             <p>Learn how to describe a trip to the grocery store.</p>
@@ -23,11 +23,14 @@ export default function HelpDialog({ isOpen, handleClick, closeText }) {
             <button onClick={handleClick}>{closeText}</button>
           </dialog>
         </div>
+      ) : (
+        // Button to open dialog box
+        <div>
+          <button className="help-btn" onClick={handleClick}>
+            Help
+          </button>
+        </div>
       )}
-      {/* Button to open dialog box */}
-      <button className="help-btn" onClick={handleClick}>
-        Help
-      </button>
     </>
   );
 }

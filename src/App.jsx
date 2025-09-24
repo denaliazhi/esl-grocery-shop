@@ -27,13 +27,17 @@ export default function App() {
     });
   }, []);
 
+  function handleClick() {
+    setShowDialog(!showDialog);
+  }
+
   return (
     <>
       <div>
         <h1>Grocery Shopping</h1>
         <HelpDialog
           isOpen={showDialog}
-          handleClick={() => setShowDialog(!showDialog)}
+          handleClick={handleClick}
           closeText={location === "/" ? "Start" : "Close"}
         />
         {location === "/" ? (

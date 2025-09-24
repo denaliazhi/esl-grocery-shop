@@ -4,18 +4,23 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Figtree";
+  src: url("./assets/Figtree.ttf");
+}
+
 :root {
-  font-size: 0.75rem;
-  font-family: system-ui, Arial, sans-serif;
+  font-size: 0.77rem;
+  font-family: Figtree, system-ui, Arial, sans-serif;
 
   --rounded: 0.7rem;
   --less-rounded: 0.3rem;
-  --lighter-grey: rgb(241, 241, 241);
-  --light-grey: rgb(217, 217, 217);
-  --dark-grey: rgb(100, 100, 100);
+  --lighter-grey: #f5f2ee;
+  --light-grey: #e5e3e0;
+  --dark-grey: #615c54a9;
   --translucent-white: rgba(255, 255, 255, 0.9);
   --accent: rgb(182, 196, 161);
-  --dark-accent: rgb(77 102 76);
+  --dark-accent: rgb(88, 109, 75);
   --highlight: rgb(255, 176, 57);
 }
 
@@ -38,8 +43,8 @@ a:active {
 }
 
 button {
-  font-size: 1em;
-  font-family: system-ui, Arial, sans-serif;
+  font-size: 0.9em;
+  font-family: Figtree, system-ui, Arial, sans-serif;
 
   padding: 0.25rem 0.5rem;
   border: none;
@@ -138,6 +143,7 @@ hr {
 /* App: Header and Footer */
 
 header {
+  font-weight: 600;
   width: 100%;
   padding: 0.5rem 1rem;
 
@@ -188,11 +194,19 @@ footer {
   width: 35rem;
   padding: 1rem;
   margin-top: auto;
+  margin-left: 0.7rem;
   border-radius: var(--rounded);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  transition: background-color 100ms ease-in-out;
+}
+
+.narration-bar:hover {
+  background-color: white;
+  cursor: pointer;
 }
 
 .narration-bar button {
@@ -217,28 +231,40 @@ footer {
 
 /* Dialog  */
 
+.help-btn {
+  color: white;
+  font-weight: 500;
+
+  position: absolute;
+  bottom: 0.8rem;
+  left: 1.3rem;
+}
+
+.help-btn:hover {
+  transform: scale(110%);
+}
+
 h1 + div {
-  z-index: 2;
   width: 60rem;
   height: 34rem;
   padding: 1rem;
   border-radius: var(--rounded);
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(7px);
+
   position: absolute;
+  transition: background-color 200ms ease-in;
 }
 
-.help-btn {
-  color: white;
+.dialog-overlay {
+  z-index: 2;
 
-  position: absolute;
-  bottom: 3rem;
-  margin-left: 1rem;
+  background-color: #303030ab;
+  backdrop-filter: blur(7px);
 }
 
 dialog {
   color: white;
   text-align: center;
+  text-shadow: 0 0 10px #000;
 
   width: 32rem;
   padding: 2rem 4rem;
@@ -346,7 +372,8 @@ dialog button:hover {
 }
 
 .cart-btn img {
-  width: 1.2rem;
+  width: 1rem;
+  height: auto;
 }
 
 .cart-btn:hover {
@@ -398,13 +425,15 @@ dialog button:hover {
 }
 
 .item-label h3 {
+  font-weight: 600;
+
   font-size: 0.9rem;
   text-align: left;
 }
 
 .item-price {
   width: 7ch;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   text-align: right;
 }
 
@@ -444,7 +473,7 @@ dialog button:hover {
 }
 
 .add-item-btn img {
-  width: 1.2rem;
+  width: 1rem;
   height: auto;
   margin-left: 0.25rem;
 }
@@ -467,9 +496,16 @@ dialog button:hover {
 }
 
 .cart-header > button:first-of-type {
+  opacity: 0.5;
   text-align: left;
   height: min-content;
   background-color: transparent;
+
+  transition: opacity 100ms ease-in;
+}
+
+.cart-header > button:first-of-type:hover {
+  opacity: 1;
 }
 
 .cart .edit-item-btn {
@@ -487,7 +523,7 @@ dialog button:hover {
 
   background-color: var(--accent);
 
-  transition: bo-shadow ease-in-out 100ms;
+  transition: box-shadow ease-in-out 100ms;
 }
 
 .checkout-btn:not(.disabled):hover {
