@@ -14,8 +14,9 @@ import LessonGuide from "./components/LessonGuide";
 import HelpDialog from "./components/HelpDialog";
 
 export default function App() {
-  const [showDialog, setShowDialog] = useState(true);
   const location = useLocation().pathname;
+
+  const [showDialog, setShowDialog] = useState(true);
   const [transcript, setTranscript] = useState([]);
 
   // Pre-load background images for smooth scene transitions
@@ -40,13 +41,21 @@ export default function App() {
 
   return (
     <>
+      <header>Everyday English</header>
       <div>
         <h1>Grocery Shopping</h1>
         <HelpDialog
           isOpen={showDialog}
           handleClick={handleClick}
           closeText={location === "/" ? "Start" : "Close"}
-        />
+        >
+          <h2>Introduction</h2>
+          <p>Learn how to describe a trip to the grocery store.</p>
+          <ol>
+            <li>Click on or hover over items on the screen.</li>
+            <li>Review the sentences that appear in the message bar below.</li>
+          </ol>
+        </HelpDialog>
         {location === "/" ? (
           <StoryMode
             setting="storefront"
@@ -67,6 +76,7 @@ export default function App() {
         )}
         <LessonGuide tabs={tabs} transcript={transcript} />
       </div>
+      <footer>Created by Denalia Zhi</footer>
     </>
   );
 }

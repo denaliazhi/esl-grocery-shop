@@ -16,9 +16,8 @@ export default function StoryMode({ setting, script, next, transcribe }) {
     transcribe(line);
   }, [lineIndex]);
 
-  function nextLine() {
+  function handleClick() {
     if (lineIndex !== script.length - 1) {
-      console.log("next...");
       setLineIndex(lineIndex + 1);
     } else {
       navigate("/" + next);
@@ -34,7 +33,7 @@ export default function StoryMode({ setting, script, next, transcribe }) {
       <NarrationBar
         text={line}
         isClickable={true}
-        handleClick={nextLine}
+        handleClick={handleClick}
       ></NarrationBar>
     </div>
   );

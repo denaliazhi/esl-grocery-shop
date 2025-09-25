@@ -4,21 +4,19 @@
  * or re-opened at any time.
  */
 
-export default function HelpDialog({ isOpen, handleClick, closeText }) {
+export default function HelpDialog({
+  isOpen,
+  handleClick,
+  closeText,
+  children,
+}) {
   return (
     <>
       {isOpen ? (
         // Wrapper div to dim/blur content behind dialog box
         <div className="dialog-overlay">
           <dialog open>
-            <h3>Introduction</h3>
-            <p>Learn how to describe a trip to the grocery store.</p>
-            <ol>
-              <li>Click on or hover over items on the screen.</li>
-              <li>
-                Review the sentences that appear in the message bar below.
-              </li>
-            </ol>
+            {children}
             {/* Button to close dialog box */}
             <button onClick={handleClick}>{closeText}</button>
           </dialog>

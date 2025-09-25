@@ -32,11 +32,15 @@ html {
 body {
   min-height: 100vh;
   background-color: var(--lighter-grey);
+}
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.3rem;
 }
 
 a,
@@ -79,10 +83,6 @@ hr {
 @media (max-width: 480px) {
   :root {
     font-size: 0.38rem;
-  }
-
-  body {
-    justify-content: flex-start;
   }
 }
 @media (min-width: 481px) and (max-width: 760px) {
@@ -154,7 +154,16 @@ hr {
 
 /* App: Header and Footer */
 
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3rem;
+}
+
 header {
+  color: var(--dark-grey);
   font-weight: 600;
   width: 100%;
   padding: 0.5rem 1rem;
@@ -162,16 +171,7 @@ header {
   background-color: var(--light-grey);
 }
 
-header p {
-  color: var(--dark-grey);
-}
-
-#app h1 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-#app {
+#app > div {
   width: 60rem;
   margin: 1.5rem 0;
 }
@@ -270,7 +270,7 @@ h1 + div {
 }
 
 .dialog-overlay {
-  z-index: 2;
+  z-index: 5;
 
   background-color: #303030ab;
   backdrop-filter: blur(7px);
@@ -293,7 +293,7 @@ dialog {
   position: relative;
 }
 
-dialog h3,
+dialog h2,
 dialog p {
   text-align: left;
   margin-bottom: 1rem;
@@ -638,10 +638,18 @@ dialog button:hover {
   display: inline;
 }
 
+.cart-item > div p:first-of-type {
+  font-weight: 600;
+}
+
 .cart-item > div > p:last-of-type {
   font-size: 0.75rem;
   color: var(--dark-grey);
   margin-left: 0.5rem;
+}
+
+.cart-item > p {
+  font-weight: 500;
 }
 
 .edit-cart {

@@ -4,8 +4,8 @@
 
 export default function NarrationBar({ text, isClickable, handleClick }) {
   return (
-    <div className="narration-bar">
-      {text}
+    <div aria-label="narration-bar" className="narration-bar" role="log">
+      <p>{text}</p>
       {isClickable && <button onClick={handleClick}>Next</button>}
     </div>
   );

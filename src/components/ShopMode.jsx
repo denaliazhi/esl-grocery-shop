@@ -17,24 +17,13 @@ import NarrationBar from "./NarrationBar.jsx";
 export default function ShopMode({ transcribe }) {
   const navigate = useNavigate();
 
+  // Set scene based on user's location in store
   const grocerySection = useLocation().pathname.slice(1);
   const imagePath = getImagePath("backgrounds", grocerySection);
 
   const [allProducts, setAllProducts] = useState(modify(inventory));
-  /* 
-  Adds data fields to each product from inventory
-  */
-  function modify(original) {
-    let modified = {};
-    for (let key of Object.keys(original)) {
-      modified[key] = original[key].map((item) => {
-        item["id"] = crypto.randomUUID();
-        item["count"] = 0;
-        return item;
-      });
-    }
-    return modified;
-  }
+  let cart = getCartContents(allProducts);
+  const [showCart, setShowCart] = useState(false);
 
   // Store content of narration bar
   const [line, setLine] = useState("Where will I go first?");
@@ -47,53 +36,31 @@ export default function ShopMode({ transcribe }) {
     cart: "highlight",
     nav: "highlight",
   });
-  const [showCart, setShowCart] = useState(false);
-
-  // Derive user's cart contents from the state of all products
-  let cart = getCartContents();
-  function getCartContents() {
-    let contents = {
-      items: [],
-      count: 0,
-      totalCost: 0,
-    };
-    for (let section of Object.keys(allProducts)) {
-      allProducts[section].forEach((item) => {
-        if (item.count > 0) {
-          item.totalCost = item.count * item.unitPrice;
-          contents.items.push(item);
-          contents.count = contents.count + item.count;
-          contents.totalCost = contents.totalCost + item.totalCost;
-        }
-      });
-    }
-    return contents;
-  }
 
   /* 
-  If a narration-triggering event has occurred, 
-  determine line to show in narration bar 
+  User navigated to a different grocery section
   */
   useEffect(() => {
-    let toRead = interpret(lastEvent, grocerySection, cart, allProducts);
-    toRead && setLine(toRead);
-  }, [lastEvent]);
-
-  /* 
-  If user has navigated to a different grocery section,
-  determine line to show in narration bar 
-  */
-  useEffect(() => {
-    let toRead = interpret({ target: "nav-bar" }, grocerySection);
-    toRead && setLine(toRead);
-
     // Stop highlighting nav bar
     if (grocerySection !== "lobby") {
       setAnimate({ ...animate, nav: false });
     }
+    // Update narration bar
+    let toRead = interpret({ target: "nav-bar", section: grocerySection });
+    toRead && setLine(toRead);
   }, [grocerySection]);
 
-  // If narration bar has changed, transcribe the contents
+  /* 
+  If event occurred during LAST render, determine 
+  line to show in narration bar based on CURRENT states
+  */
+  useEffect(() => {
+    // Pass in current cart and product states
+    let toRead = interpret({ ...lastEvent, cart: cart, products: allProducts });
+    toRead && setLine(toRead);
+  }, [lastEvent]);
+
+  // If narration bar has changed, add contents to transcript
   useEffect(() => {
     transcribe(line);
   }, [line]);
@@ -199,4 +166,39 @@ export default function ShopMode({ transcribe }) {
       ></NarrationBar>
     </div>
   );
+}
+
+/* 
+  Adds data fields to each product from inventory
+  */
+function modify(original) {
+  let modified = {};
+  for (let key of Object.keys(original)) {
+    modified[key] = original[key].map((item) => {
+      item["id"] = crypto.randomUUID();
+      item["count"] = 0;
+      return item;
+    });
+  }
+  return modified;
+}
+
+// Derive user's cart contents from the state of all products
+function getCartContents(products) {
+  let contents = {
+    items: [],
+    count: 0,
+    totalCost: 0,
+  };
+  for (let section of Object.keys(products)) {
+    products[section].forEach((item) => {
+      if (item.count > 0) {
+        item.totalCost = item.count * item.unitPrice;
+        contents.items.push(item);
+        contents.count = contents.count + item.count;
+        contents.totalCost = contents.totalCost + item.totalCost;
+      }
+    });
+  }
+  return contents;
 }

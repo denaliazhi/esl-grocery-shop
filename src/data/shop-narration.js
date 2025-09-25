@@ -15,19 +15,19 @@ const overviews = {
     "I'm in the frozen foods section. Frozen food lasts a very long time.",
 };
 
-export default function interpret(e, section, cart, products) {
+export default function interpret(e) {
   if (!e) return false;
   if (
     // Clicked on section link in store nav
     e.target === "nav-bar"
   ) {
-    return overviews[section];
+    return overviews[e.section];
   } else if (
     // Clicked on a product edit-button (Add, Remove, or Number Picker)
     e.target === "product"
   ) {
-    // Search all products for item because item could have been removed from cart
-    let product = products[e.section].find((item) => item.id === e.id);
+    // Search all products because item may no longer be in cart
+    let product = e.products[e.section].find((item) => item.id === e.id);
     if (product) {
       let unit = product.speechUnit;
 
@@ -54,11 +54,11 @@ export default function interpret(e, section, cart, products) {
     // Hover over or clicked on cart icon
     e.target === "cart"
   ) {
-    if (cart.count === 0) {
+    if (e.cart.count === 0) {
       return "I don't have anything in my cart.";
     }
-    return `I have ${cart.count} item${
-      cart.count === 1 ? "" : "s"
+    return `I have ${e.cart.count} item${
+      e.cart.count === 1 ? "" : "s"
     } in my cart.`;
   } else if (
     // Hovered over checkout button, items in cart
@@ -84,7 +84,7 @@ export default function interpret(e, section, cart, products) {
     // Hovered over receipt item
     e.target === "receipt-item"
   ) {
-    let product = cart.items.find((item) => item.id === e.id);
+    let product = e.cart.items.find((item) => item.id === e.id);
     let unit = product.speechUnit;
 
     if (product.count === 1) {
@@ -107,7 +107,7 @@ export default function interpret(e, section, cart, products) {
     // Hovered over receipt total
     e.target === "receipt-total"
   ) {
-    return `I spent $${cart.totalCost.toFixed(2)} on groceries.`;
+    return `I spent $${e.cart.totalCost.toFixed(2)} on groceries.`;
   }
   return false;
 }
