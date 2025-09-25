@@ -20,7 +20,7 @@ export default function CartIcon({ cart, handleClick, handleMouse, animate }) {
         }
       >
         <img src="/icons/cart-icon.png" alt="Cart icon" />
-        {cart.count}
+        <p>{cart.count}</p>
       </button>
     </>
   );

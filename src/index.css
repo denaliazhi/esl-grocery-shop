@@ -24,15 +24,19 @@
   --highlight: rgb(255, 176, 57);
 }
 
+html {
+  scrollbar-gutter: stable;
+  scrollbar-color: #a7a5a3 transparent;
+}
+
 body {
   min-height: 100vh;
   background-color: var(--lighter-grey);
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 a,
@@ -83,7 +87,7 @@ hr {
 }
 @media (min-width: 481px) and (max-width: 760px) {
   :root {
-    font-size: 0.64rem;
+    font-size: 0.55rem;
   }
 }
 
@@ -135,8 +139,16 @@ hr {
   }
 }
 @keyframes pulse {
+  0% {
+    outline-color: var(--highlight);
+  }
   50% {
-    box-shadow: 0 0 4px 3px var(--highlight);
+    outline: 4px solid var(--highlight);
+    outline-offset: 3px;
+    /* box-shadow: 0 0 4px 3px var(--highlight); */
+  }
+  100% {
+    outline-color: var(--highlight);
   }
 }
 
@@ -169,6 +181,7 @@ footer {
   text-align: right;
   width: 100%;
   padding: 1rem 1rem;
+  margin-top: auto;
 }
 
 /* Viewer and Narration Bar */
@@ -190,6 +203,8 @@ footer {
 
 .narration-bar {
   align-self: center;
+
+  font-weight: 500;
 
   width: 35rem;
   padding: 1rem;
@@ -218,10 +233,6 @@ footer {
   animation: poke 2s infinite;
 }
 
-.narration-bar button:hover {
-  box-shadow: 0 0 3px 1px var(--dark-grey);
-}
-
 .narration-bar button::after {
   content: ">";
   padding-left: 0.3rem;
@@ -238,10 +249,14 @@ footer {
   position: absolute;
   bottom: 0.8rem;
   left: 1.3rem;
+
+  transition: transform 100ms ease-in-out;
 }
 
 .help-btn:hover {
   transform: scale(110%);
+  outline: 1px solid white;
+  outline-offset: 2.5px;
 }
 
 h1 + div {
@@ -329,14 +344,17 @@ dialog button:hover {
 }
 
 .shop-nav li {
-  padding: 0 0.5rem;
+  padding: 0.1rem 0.5rem;
   border: 2px solid transparent;
   list-style: none;
+
+  transition: background-color 100ms ease-in-out;
 }
 
 .shop-nav li:not(.selected):hover {
-  border: 2px solid var(--light-grey);
-  background-color: var(--lighter-grey);
+  background-color: white;
+
+  outline: 1px solid var(--accent);
 }
 
 .selected {
@@ -355,11 +373,9 @@ dialog button:hover {
 
   width: min-content;
   height: min-content;
-  padding: 0.5rem 1rem;
+  padding: 0;
   margin-left: auto;
-  border-radius: var(--less-rounded);
-
-  box-shadow: 0 0 3px 1px var(--dark-grey);
+  background-color: transparent;
 
   display: flex;
   gap: 0.5rem;
@@ -368,16 +384,40 @@ dialog button:hover {
   animation-duration: 300ms;
   animation-iteration-count: 1;
 
-  transition: box-shadow ease-in-out 100ms;
+  position: relative;
 }
 
 .cart-btn img {
-  width: 1rem;
+  width: 2rem;
   height: auto;
+  padding: 0.5rem;
+  border-radius: var(--less-rounded);
+
+  background-color: white;
 }
 
-.cart-btn:hover {
-  box-shadow: 0 0 2px 1px var(--dark-grey);
+.cart-btn p {
+  top: -0.5rem;
+  right: -0.5rem;
+  position: absolute;
+
+  font-weight: 700;
+  color: white;
+  height: 1.5rem;
+  width: 1.5rem;
+  padding-top: 0.15rem;
+
+  background-color: rgb(223, 77, 77);
+  border-radius: 50%;
+  box-shadow: 0 0 3px 1px var(--dark-grey);
+
+  transition: transform ease-in-out 100ms;
+}
+
+.cart-btn img:hover {
+  outline: 1px solid white;
+  outline-offset: 2px;
+  transform: scale(110%);
 }
 
 .cart-btn.highlighted {
@@ -399,11 +439,14 @@ dialog button:hover {
 
 .shelf-item {
   text-align: center;
+
   width: 100%;
   padding-top: 0.5rem;
   border-radius: var(--rounded);
 
   position: relative;
+
+  transition: transform 100ms ease-in;
 }
 
 .shelf-item img {
@@ -412,7 +455,7 @@ dialog button:hover {
 }
 
 .item-label {
-  height: 3.38rem;
+  height: 3.6rem;
   padding: 0.5rem 1rem;
   border-bottom-left-radius: var(--rounded);
   border-bottom-right-radius: var(--rounded);
@@ -425,20 +468,23 @@ dialog button:hover {
 }
 
 .item-label h3 {
-  font-weight: 600;
-
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 1rem;
   text-align: left;
 }
 
 .item-price {
   width: 7ch;
+  font-weight: 600;
   font-size: 0.82rem;
   text-align: right;
 }
 
 .add-item-btn,
 .edit-item-btn {
+  color: var(--dark-accent);
+  font-weight: 600;
+
   border-radius: var(--less-rounded);
   border: 2px solid transparent;
 
@@ -448,12 +494,18 @@ dialog button:hover {
   gap: 0.2rem;
   align-items: center;
 
-  transition: box-shadow ease-in-out 100ms;
+  transition: transform ease-in-out 100ms;
+}
+
+.edit-item-btn button {
+  font-weight: 600;
 }
 
 .add-item-btn:hover,
 .edit-item-btn:hover {
-  box-shadow: 0 0 2px 1px var(--dark-grey);
+  outline: 1px solid var(--dark-grey);
+  outline-offset: 2.5px;
+  transform: scale(105%);
 }
 
 .shelf .edit-item-btn {
@@ -473,6 +525,8 @@ dialog button:hover {
 }
 
 .add-item-btn img {
+  opacity: 0.7;
+
   width: 1rem;
   height: auto;
   margin-left: 0.25rem;
@@ -523,11 +577,17 @@ dialog button:hover {
 
   background-color: var(--accent);
 
-  transition: box-shadow ease-in-out 100ms;
+  transition: transform ease-in-out 100ms;
 }
 
 .checkout-btn:not(.disabled):hover {
-  box-shadow: 0 0 2px 1px var(--dark-grey);
+  outline: 1px solid var(--dark-grey);
+  outline-offset: 2.5px;
+  transform: scale(105%);
+}
+
+.checkout-btn a {
+  color: var(--dark-accent);
 }
 
 .checkout-btn.disabled {
@@ -540,8 +600,7 @@ dialog button:hover {
   text-align: left;
 
   max-height: 12.5rem;
-  padding-left: 1.75rem;
-  padding-right: 1.9rem;
+  padding-left: 1.55rem;
 
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -549,9 +608,21 @@ dialog button:hover {
 }
 
 .cart-item {
+  margin-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-right: 1.9rem;
+  border: 1px solid transparent;
+
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+
+  transition: background-color 100ms ease-in-out;
+}
+
+.cart-item:hover {
+  cursor: pointer;
+  background-color: white;
 }
 
 .cart-item img {
@@ -600,7 +671,7 @@ dialog button:hover {
 
 .cart > hr,
 .cart-total {
-  margin: 0.2rem 2rem 0;
+  margin: 0.2rem 2.5rem 0;
 }
 
 .cart-total {
