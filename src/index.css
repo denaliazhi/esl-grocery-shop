@@ -155,6 +155,7 @@ hr {
 /* App: Header and Footer */
 
 #app {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -242,7 +243,7 @@ footer {
 
 /* Dialog  */
 
-.help-btn {
+.show-help-btn {
   color: white;
   font-weight: 500;
 
@@ -253,7 +254,7 @@ footer {
   transition: transform 100ms ease-in-out;
 }
 
-.help-btn:hover {
+.show-help-btn:hover {
   transform: scale(110%);
   outline: 1px solid white;
   outline-offset: 2.5px;

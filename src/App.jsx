@@ -15,8 +15,6 @@ import HelpDialog from "./components/HelpDialog";
 
 export default function App() {
   const location = useLocation().pathname;
-
-  const [showDialog, setShowDialog] = useState(true);
   const [transcript, setTranscript] = useState([]);
 
   // Pre-load background images for smooth scene transitions
@@ -29,10 +27,6 @@ export default function App() {
     });
   }, []);
 
-  function handleClick() {
-    setShowDialog(!showDialog);
-  }
-
   function transcribe(line) {
     if (line !== "" && line !== undefined) {
       !transcript.includes(line) && setTranscript([...transcript, line]);
@@ -44,11 +38,7 @@ export default function App() {
       <header>Everyday English</header>
       <div>
         <h1>Grocery Shopping</h1>
-        <HelpDialog
-          isOpen={showDialog}
-          handleClick={handleClick}
-          closeText={location === "/" ? "Start" : "Close"}
-        >
+        <HelpDialog closeText={location === "/" ? "Start" : "Close"}>
           <h2>Introduction</h2>
           <p>Learn how to describe a trip to the grocery store.</p>
           <ol>

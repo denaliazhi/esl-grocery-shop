@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Help dialog > renders dialog box with expected contents 1`] = `
+<div>
+  <div
+    class="dialog-overlay"
+  >
+    <dialog
+      open=""
+    >
+      Follow these instructions
+      <button
+        class="close-help-btn"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+</div>
+`;
+
+exports[`Help dialog > when open, renders expected contents 1`] = `
+<div>
+  <div
+    class="dialog-overlay"
+  >
+    <dialog
+      open=""
+    >
+      Follow these instructions
+      <button
+        class="close-help-btn"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+</div>
+`;
