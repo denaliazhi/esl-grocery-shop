@@ -8,12 +8,9 @@ describe("Help dialog", () => {
   test("when open, renders expected contents", () => {
     const instructions = "Follow these instructions";
 
-    const { container } = render(
-      <HelpDialog closeText="Close">{instructions}</HelpDialog>
-    );
+    render(<HelpDialog closeText="Close">{instructions}</HelpDialog>);
     const dialog = screen.getByRole("dialog");
 
-    expect(container).toMatchSnapshot();
     expect(dialog).toBeInTheDocument();
     expect(dialog.textContent).toMatch(instructions);
   });

@@ -6,7 +6,7 @@
 export default function RemoveItem({ value, handleClick }) {
   return (
     <button className="remove-btn" onClick={(e) => handleClick(e, -value)}>
-      <span></span> Remove
+      Remove
     </button>
   );
 }

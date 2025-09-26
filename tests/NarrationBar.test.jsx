@@ -63,6 +63,7 @@ describe("Narration bar", () => {
 
   test("doesn't call handleClick when 'Next' isn't clicked", async () => {
     const handleClick = vi.fn();
+    const user = userEvent.setup();
 
     render(
       <NarrationBar
@@ -71,6 +72,8 @@ describe("Narration bar", () => {
         handleClick={handleClick}
       />
     );
+    const bar = screen.getByRole("log");
+    await user.click(bar);
 
     expect(handleClick).not.toHaveBeenCalled();
   });

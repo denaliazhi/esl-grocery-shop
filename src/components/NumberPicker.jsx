@@ -6,9 +6,13 @@
 export default function NumberPicker({ value, handleClick }) {
   return (
     <div className="edit-item-btn">
-      <button onClick={(e) => handleClick(e, -1)}>-</button>
+      <button onClick={(e) => handleClick(e, -1)} aria-label="Subtract 1">
+        -
+      </button>
       <p>{value}</p>
-      <button onClick={(e) => handleClick(e, 1)}>+</button>
+      <button onClick={(e) => handleClick(e, 1)} aria-label="Add 1">
+        +
+      </button>
     </div>
   );
 }
