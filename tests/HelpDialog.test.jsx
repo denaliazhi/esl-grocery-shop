@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -22,33 +22,33 @@ describe("Help dialog", () => {
     expect(closeButton).toHaveLength(1);
     expect(closeButton[0].textContent).toMatch("Close");
   });
+});
+
+describe("Help dialog | Interactions", () => {
+  let user, closeButton;
+
+  beforeEach(() => {
+    user = userEvent.setup();
+    render(<HelpDialog closeText="Close">"Blah"</HelpDialog>);
+    closeButton = screen.getByRole("button");
+  });
 
   test("clicking 'Close' button closes dialog", async () => {
-    const user = userEvent.setup();
-
-    render(<HelpDialog closeText="Close">"Blah"</HelpDialog>);
-    const closeButton = screen.getByRole("button");
     const dialog = screen.getByRole("dialog");
     await user.click(closeButton);
 
     expect(dialog).not.toBeInTheDocument();
   });
-  test("when closed, renders 'Help' not 'Close' button", async () => {
-    const user = userEvent.setup();
 
-    render(<HelpDialog closeText="Close">"Blah"</HelpDialog>);
-    const closeButton = screen.getByRole("button");
+  test("when closed, renders 'Help' not 'Close' button", async () => {
     await user.click(closeButton);
     const helpButton = screen.getAllByRole("button");
 
     expect(helpButton).toHaveLength(1);
     expect(helpButton[0].textContent).toMatch("Help");
   });
-  test("clicking 'Help' button opens dialog", async () => {
-    const user = userEvent.setup();
 
-    render(<HelpDialog closeText="Close">"Blah"</HelpDialog>);
-    const closeButton = screen.getByRole("button");
+  test("clicking 'Help' button opens dialog", async () => {
     await user.click(closeButton);
     const helpButton = screen.getByRole("button");
     await user.click(helpButton);

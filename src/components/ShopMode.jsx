@@ -41,12 +41,18 @@ export default function ShopMode({ transcribe }) {
   User navigated to a different grocery section
   */
   useEffect(() => {
-    // Stop highlighting nav bar
-    if (grocerySection !== "lobby") {
-      setAnimate({ ...animate, nav: false });
+    let toRead = false;
+    if (grocerySection === "checkout") {
+      setShowCart(false);
+      toRead = interpret({ target: "post-checkout" });
+    } else {
+      if (grocerySection !== "lobby") {
+        // Stop highlighting nav bar
+        setAnimate({ ...animate, nav: false });
+      }
+      // Update narration bar
+      toRead = interpret({ target: "nav-bar", section: grocerySection });
     }
-    // Update narration bar
-    let toRead = interpret({ target: "nav-bar", section: grocerySection });
     toRead && setLine(toRead);
   }, [grocerySection]);
 
@@ -103,17 +109,16 @@ export default function ShopMode({ transcribe }) {
     }
   }
 
-  function handleCheckout() {
-    setShowCart(false);
-    setLastEvent({ target: "post-checkout" });
-  }
-
   function handleCartClick() {
     // Stop highlighting cart after first click
     if (animate.cart === "highlight") {
       setAnimate({ ...animate, cart: false });
     }
     setShowCart(!showCart);
+    handleCartMouse();
+  }
+
+  function handleCartMouse() {
     setLastEvent({ target: "cart" });
   }
 
@@ -131,7 +136,6 @@ export default function ShopMode({ transcribe }) {
           <Cart
             cart={cart}
             handleClose={() => setShowCart(false)}
-            handleCheckout={handleCheckout}
             handleMouse={setLastEvent}
             updateCount={updateCount}
           />
@@ -152,7 +156,7 @@ export default function ShopMode({ transcribe }) {
           <CartIcon
             cart={cart}
             handleClick={handleCartClick}
-            handleMouse={setLastEvent}
+            handleMouse={handleCartMouse}
             animate={animate.cart}
           />
         )}

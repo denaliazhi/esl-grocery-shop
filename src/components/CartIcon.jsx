@@ -12,7 +12,7 @@ export default function CartIcon({ cart, handleClick, handleMouse, animate }) {
         }
         aria-label="View cart"
         onClick={handleClick}
-        onMouseOver={() => handleMouse({ target: "cart" })}
+        onMouseOver={handleMouse}
         style={
           animate === "stretch" || animate === "squeeze"
             ? { animationName: animate }

@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Cart item > renders expected content 1`] = `
+<div>
+  <div
+    class="product cart-item"
+    data-section="produce"
+    id="x123"
+  >
+    <img
+      alt="apple"
+      src="products/apple.png"
+      width="50"
+    />
+    <div>
+      <p>
+        Apple
+        ,
+      </p>
+      <p>
+        $
+        1.23
+         / 
+      </p>
+      <div
+        class="edit-cart"
+      >
+        <button>
+          beep
+        </button>
+        <button>
+          boop
+        </button>
+      </div>
+    </div>
+    <p>
+      $
+      1.23
+    </p>
+  </div>
+</div>
+`;
