@@ -340,7 +340,7 @@ dialog button:hover {
   flex-direction: column;
 }
 
-.shop-nav.highlighted {
+.shop-nav.highlight {
   animation: pulse 1.8s infinite ease-in-out;
 }
 
@@ -421,7 +421,7 @@ dialog button:hover {
   transform: scale(110%);
 }
 
-.cart-btn.highlighted {
+.cart-btn.highlight {
   animation: pulse 1.8s infinite ease-in-out;
 }
 

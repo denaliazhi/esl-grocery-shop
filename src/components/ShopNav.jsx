@@ -7,15 +7,12 @@ import { Link } from "react-router";
 
 export default function ShopNav({ options, selected, animate }) {
   return (
-    <ul className={animate ? "shop-nav highlighted" : "shop-nav"}>
-      {options.map((options) => {
+    <ul className={`shop-nav ${animate ? animate : ""}`}>
+      {options.map((option) => {
         return (
-          <li
-            key={options}
-            className={options === selected ? "selected" : null}
-          >
-            <Link to={`/${options}`} id={options}>
-              {capitalize(options)}
+          <li key={option} className={option === selected ? "selected" : null}>
+            <Link to={`/${option}`} id={option}>
+              {capitalize(option)}
             </Link>
           </li>
         );

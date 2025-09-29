@@ -22,7 +22,7 @@ describe("Cart icon", () => {
     expect(button.textContent).toMatch(cart.count);
   });
 
-  test("adds 'highlighted' class if animation is 'highlight'", () => {
+  test("adds 'highlight' class if animation is 'highlight'", () => {
     render(
       <CartIcon
         cart={cart}
@@ -32,8 +32,8 @@ describe("Cart icon", () => {
       />
     );
     const button = screen.getByRole("button");
-
-    expect(button).toHaveClass("highlighted");
+    screen.debug();
+    expect(button).toHaveClass("highlight");
   });
 
   test("styles valid animation, 'stretch'", () => {

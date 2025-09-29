@@ -1,6 +1,6 @@
 import { vi, describe, test, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, useActionData } from "react-router";
+import { MemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 
 import Cart from "../src/components/Cart";

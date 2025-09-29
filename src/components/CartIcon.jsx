@@ -7,9 +7,7 @@ export default function CartIcon({ cart, handleClick, handleMouse, animate }) {
   return (
     <>
       <button
-        className={
-          animate === "highlight" ? "cart-btn highlighted" : "cart-btn"
-        }
+        className={animate === "highlight" ? "cart-btn highlight" : "cart-btn"}
         aria-label="View cart"
         onClick={handleClick}
         onMouseOver={handleMouse}
