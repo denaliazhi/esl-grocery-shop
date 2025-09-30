@@ -54,7 +54,7 @@ describe.each(testCases)("Shop nav", ({ options, selected, animate }) => {
   });
 
   test(`component ${animate ? "is animated" : "isn't animated"}`, () => {
-    const nav = screen.getByRole("list");
+    const nav = screen.getByRole("navigation");
     animate
       ? expect(nav).toHaveClass("highlight")
       : expect(nav).not.toHaveClass("highlight");

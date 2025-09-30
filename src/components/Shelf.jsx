@@ -11,11 +11,11 @@ export default function Shelf() {
   return (
     <>
       {grocerySection ? (
-        <div className="shelf">
+        <section className="shelf">
           {allProducts[grocerySection].map((item) => (
             <ShelfItem key={item.id} item={item} handleClick={updateCount} />
           ))}
-        </div>
+        </section>
       ) : null}
     </>
   );

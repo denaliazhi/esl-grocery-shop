@@ -15,7 +15,7 @@ function getArticle(noun) {
   return "a";
 }
 
-// Format path to image
+// Format path to image (ex. backgrounds/storefront.png)
 function getImagePath(prefix, name) {
   return `${prefix}/${name.replace(/ |_/, "-")}.png`;
 }

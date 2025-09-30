@@ -7,12 +7,14 @@ import { getArticle } from "../utils";
 import pluralize, { isPlural } from "pluralize";
 
 const overviews = {
+  lobby: "Where will I go first?",
   produce: "I'm in the produce section. It has fresh fruits and vegetables.",
   bakery: "I'm in the bakery section. It has fresh baked goods.",
   dairy: "I'm in the dairy section. It has refrigerated milk products.",
   meat: "I'm in the meat section. It has fresh cuts of meat.",
   frozen_foods:
     "I'm in the frozen foods section. Frozen food lasts a very long time.",
+  checkout: "I checked out. This is my receipt.",
 };
 
 export default function interpret(e) {
@@ -72,9 +74,9 @@ export default function interpret(e) {
     return "I don't have anything to checkout.";
   } else if (
     // Clicked checkout button
-    e.target === "post-checkout"
+    e.target === "checkout"
   ) {
-    return "I checked out. This is my receipt.";
+    return overviews["checkout"];
   } else if (
     // Hovered over receipt header
     e.target === "receipt-header"
@@ -111,3 +113,5 @@ export default function interpret(e) {
   }
   return false;
 }
+
+export { overviews };

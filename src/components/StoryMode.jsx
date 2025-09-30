@@ -4,6 +4,7 @@
  */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { getImagePath } from "../utils";
 import NarrationBar from "./NarrationBar";
 
 export default function StoryMode({ setting, script, next, transcribe }) {
@@ -24,10 +25,10 @@ export default function StoryMode({ setting, script, next, transcribe }) {
     }
   }
   return (
-    <div
+    <main
       className="viewer"
       style={{
-        backgroundImage: `url(backgrounds/${setting}.png)`,
+        backgroundImage: `url(${getImagePath("backgrounds", setting)})`,
       }}
     >
       <NarrationBar
@@ -35,6 +36,6 @@ export default function StoryMode({ setting, script, next, transcribe }) {
         isClickable={true}
         handleClick={handleClick}
       ></NarrationBar>
-    </div>
+    </main>
   );
 }

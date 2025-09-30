@@ -6,7 +6,7 @@ import { Outlet, useLocation, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
 import { getImagePath } from "../utils.js";
-import interpret from "../data/shop-narration.js";
+import interpret, { overviews } from "../data/shop-narration.js";
 import inventory from "../data/inventory.js";
 
 import ShopNav from "./ShopNav.jsx";
@@ -26,7 +26,7 @@ export default function ShopMode({ transcribe }) {
   const [showCart, setShowCart] = useState(false);
 
   // Store content of narration bar
-  const [line, setLine] = useState("Where will I go first?");
+  const [line, setLine] = useState(overviews.lobby);
 
   // Store last narration-triggering event
   const [lastEvent, setLastEvent] = useState();
@@ -44,7 +44,7 @@ export default function ShopMode({ transcribe }) {
     let toRead = false;
     if (grocerySection === "checkout") {
       setShowCart(false);
-      toRead = interpret({ target: "post-checkout" });
+      toRead = interpret({ target: "checkout" });
     } else {
       if (grocerySection !== "lobby") {
         // Stop highlighting nav bar
@@ -123,7 +123,7 @@ export default function ShopMode({ transcribe }) {
   }
 
   return (
-    <div className="viewer" style={{ backgroundImage: `url(${imagePath})` }}>
+    <main className="viewer" style={{ backgroundImage: `url(${imagePath})` }}>
       <div className="virtual-store">
         {grocerySection !== "checkout" && (
           <ShopNav
@@ -168,7 +168,7 @@ export default function ShopMode({ transcribe }) {
           navigate("/end");
         }}
       ></NarrationBar>
-    </div>
+    </main>
   );
 }
 
