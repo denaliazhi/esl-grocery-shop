@@ -21,6 +21,7 @@ exports[`Cart item > renders expected content 1`] = `
         $
         1.23
          / 
+        each
       </p>
       <div
         class="edit-cart"

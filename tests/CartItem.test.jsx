@@ -17,6 +17,7 @@ describe("Cart item", () => {
       id: "x123",
       name: "apple",
       unitPrice: 1.23,
+      displayUnit: "each",
       section: "produce",
       count: 1,
       totalCost: 1.23,

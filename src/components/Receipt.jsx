@@ -31,7 +31,7 @@ export default function Receipt() {
           <p>San Francisco, CA</p>
         </div>
         <hr />
-        <div className="receipt-items">
+        <ul className="receipt-items">
           {cart.items.map((item) => (
             <ReceiptItem
               key={item.id}
@@ -39,7 +39,7 @@ export default function Receipt() {
               handleMouse={() => handleMouse("receipt-item", item.id)}
             />
           ))}
-        </div>
+        </ul>
         <hr />
         <div className="receipt-total">
           <div>

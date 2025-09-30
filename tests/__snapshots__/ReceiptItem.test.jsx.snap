@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Receipt item > renders expected content 1`] = `
+<div>
+  <li>
+    <p>
+      1
+    </p>
+    <div>
+      <p>
+        Apple
+        ,
+      </p>
+      <p>
+        1.23
+         / 
+        each
+      </p>
+    </div>
+    <p>
+      1.23
+    </p>
+  </li>
+</div>
+`;

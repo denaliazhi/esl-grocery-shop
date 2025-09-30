@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Shelf item > renders expected content 1`] = `
+<div>
+  <div
+    class="product shelf-item"
+    data-section="produce"
+    id="x123"
+  >
+    <img
+      alt=""
+      src="products/apple.png"
+      width="100"
+    />
+    <div
+      class="item-label"
+    >
+      <h3>
+        Apple
+      </h3>
+      <div
+        class="item-price"
+      >
+        <p>
+          $
+          1.23
+           /
+        </p>
+        <p>
+          each
+        </p>
+      </div>
+    </div>
+    <button>
+      Edit
+    </button>
+  </div>
+</div>
+`;

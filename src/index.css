@@ -768,19 +768,20 @@ dialog button:hover {
   text-align: left;
 }
 
-.receipt-items > div {
+.receipt-items > li {
   padding: 0 0.5rem;
   margin-bottom: 0.5rem;
+
   display: flex;
   gap: 0.5rem;
   justify-content: space-between;
 }
 
-.receipt-items > div > div {
+.receipt-items > li > div {
   margin-right: auto;
 }
 
-.receipt-items > div > div > p:last-of-type {
+.receipt-items > li > div > p:last-of-type {
   color: var(--dark-grey);
 }
 
@@ -797,12 +798,12 @@ dialog button:hover {
   margin-top: 1rem;
 }
 
-.receipt-items > div,
+.receipt-items > li,
 .receipt-header > h2,
 .receipt-total > div:last-of-type {
   border: 1px solid transparent;
 }
-.receipt-items > div:hover,
+.receipt-items > li:hover,
 .receipt-header > h2:hover,
 .receipt-total > div:last-of-type:hover {
   cursor: pointer;

@@ -5,7 +5,7 @@ import { capitalize } from "../utils.js";
 
 export default function ReceiptItem({ item, handleMouse }) {
   return (
-    <div onMouseOver={handleMouse}>
+    <li onMouseOver={handleMouse}>
       <p>{item.count}</p>
       <div>
         <p>{capitalize(item.name)},</p>
@@ -14,6 +14,6 @@ export default function ReceiptItem({ item, handleMouse }) {
         </p>
       </div>
       <p>{item.totalCost.toFixed(2)}</p>
-    </div>
+    </li>
   );
 }
