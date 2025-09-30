@@ -37,7 +37,7 @@ describe.each(testCases)("Shop nav", ({ options, selected, animate }) => {
   });
 
   test.each([options])(
-    `renders each option as a link that navigates to the expected route`,
+    `renders each option as a link to the expected route`,
     (option) => {
       const link = screen.getByText(option);
       expect(link).toBeDefined();

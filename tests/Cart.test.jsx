@@ -56,7 +56,7 @@ describe.each(testCases)("Cart with n items", ({ input, output }) => {
     expect(cartCount).toBeInTheDocument();
   });
 
-  test(`n = ${input.count}: renders checkout link that navigates to '/checkout'`, () => {
+  test(`n = ${input.count}: renders link to '/checkout'`, () => {
     const checkoutLink = screen.getByRole("link", { name: "Checkout" });
 
     expect(checkoutLink).toBeDefined();

@@ -185,6 +185,22 @@ footer {
   margin-top: auto;
 }
 
+#app > .error {
+  text-align: center;
+}
+
+.error h2 {
+  margin-bottom: 2rem;
+}
+
+.error a {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--less-rounded);
+
+  background-color: var(--light-grey);
+}
+
 /* Viewer and Narration Bar */
 
 .viewer {
