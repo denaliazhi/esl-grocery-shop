@@ -54,6 +54,7 @@ export default function ShopMode({ transcribe }) {
       toRead = interpret({ target: "nav-bar", section: grocerySection });
     }
     toRead && setLine(toRead);
+    transcribe("———————————");
   }, [grocerySection]);
 
   /* 

@@ -11,7 +11,12 @@ const backgroundImages = [
 
 const script = {
   intro: ["I'm at Green Goods.", "I'm grocery shopping."],
-  end: ["I'm finished shopping. I'll go home now.", "This lesson is over."],
+  end: [
+    "I'm finished shopping. I'll go home now.",
+    "This lesson is over.",
+    "Review your experience in the 'Transcript' tab below.",
+    "Click 'Next' to restart.",
+  ],
 };
 
 const tabs = {

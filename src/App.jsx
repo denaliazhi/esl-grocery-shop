@@ -15,6 +15,7 @@ import HelpDialog from "./components/HelpDialog";
 
 export default function App() {
   const location = useLocation().pathname;
+  console.log(location);
   const [transcript, setTranscript] = useState([]);
 
   // Pre-load background images for smooth scene transitions
@@ -29,7 +30,7 @@ export default function App() {
 
   function transcribe(line) {
     if (line !== "" && line !== undefined) {
-      !transcript.includes(line) && setTranscript([...transcript, line]);
+      setTranscript([...transcript, line]);
     }
   }
 
@@ -48,6 +49,7 @@ export default function App() {
         </HelpDialog>
         {location === "/" ? (
           <StoryMode
+            key="storefront"
             setting="storefront"
             script={script.intro}
             next="lobby"
@@ -55,6 +57,7 @@ export default function App() {
           />
         ) : location === "/end" ? (
           <StoryMode
+            key="checkout"
             setting="checkout"
             script={script.end}
             next=""

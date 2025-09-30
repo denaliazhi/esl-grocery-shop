@@ -13,6 +13,9 @@ export default function StoryMode({ setting, script, next, transcribe }) {
   const [lineIndex, setLineIndex] = useState(0);
   let line = script[lineIndex];
 
+  console.log(setting);
+  console.log(lineIndex);
+
   useEffect(() => {
     transcribe(line);
   }, [lineIndex]);
@@ -22,10 +25,12 @@ export default function StoryMode({ setting, script, next, transcribe }) {
       setLineIndex(lineIndex + 1);
     } else {
       navigate("/" + next);
+      transcribe("———————————");
     }
   }
   return (
     <main
+      key={setting}
       className="viewer"
       style={{
         backgroundImage: `url(${getImagePath("backgrounds", setting)})`,
