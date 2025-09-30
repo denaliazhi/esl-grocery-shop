@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/26</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/26</span>
+                <span class='fraction'>26/26</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -100,71 +100,71 @@
 <a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * This component renders the details for an item in shelf view.
  */
-<span class="cstat-no" title="statement not covered" >import AddItem from "./AddItem";</span>
-<span class="cstat-no" title="statement not covered" >import NumberPicker from "./NumberPicker";</span>
-<span class="cstat-no" title="statement not covered" >import { capitalize, getImagePath } from "../utils";</span>
+import AddItem from "./AddItem";
+import NumberPicker from "./NumberPicker";
+import { capitalize, getImagePath } from "../utils";
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default function ShelfItem({ item, handleClick }) {</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div</span>
-<span class="cstat-no" title="statement not covered" >        className="product shelf-item"</span>
-<span class="cstat-no" title="statement not covered" >        id={item.id}</span>
-<span class="cstat-no" title="statement not covered" >        data-section={item.section}</span>
+export default function ShelfItem({ item, handleClick }) {
+  return (
+    &lt;&gt;
+      &lt;div
+        className="product shelf-item"
+        id={item.id}
+        data-section={item.section}
       &gt;
-<span class="cstat-no" title="statement not covered" >        &lt;img src={getImagePath("products", item.name)} alt="" width="100" /&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="item-label"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h3&gt;{capitalize(item.name)}&lt;/h3&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;div className="item-price"&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;p&gt;${item.unitPrice.toFixed(2)} /&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;p&gt;{item.displayUnit}&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        {item.count === 0 ? (</span>
-<span class="cstat-no" title="statement not covered" >          &lt;AddItem handleClick={handleClick} /&gt;</span>
+        &lt;img src={getImagePath("products", item.name)} alt="" width="100" /&gt;
+        &lt;div className="item-label"&gt;
+          &lt;h3&gt;{capitalize(item.name)}&lt;/h3&gt;
+          &lt;div className="item-price"&gt;
+            &lt;p&gt;${item.unitPrice.toFixed(2)} /&lt;/p&gt;
+            &lt;p&gt;{item.displayUnit}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        {item.count === 0 ? (
+          &lt;AddItem handleClick={handleClick} /&gt;
         ) : (
-<span class="cstat-no" title="statement not covered" >          &lt;&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;NumberPicker value={item.count} handleClick={handleClick} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/&gt;</span>
+          &lt;&gt;
+            &lt;NumberPicker value={item.count} handleClick={handleClick} /&gt;
+          &lt;/&gt;
         )}
-<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/&gt;</span>
+      &lt;/div&gt;
+    &lt;/&gt;
   );
-<span class="cstat-no" title="statement not covered" >}</span>
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -172,7 +172,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-29T19:39:39.499Z
+                at 2025-09-30T02:03:20.375Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -5,7 +5,7 @@ import Receipt from "../src/components/Receipt";
 import userEvent from "@testing-library/user-event";
 
 describe("Receipt", () => {
-  test("renders expected content", () => {
+  test.skip("renders expected content", () => {
     // render(<Receipt />);
     // screen.debug();
   });

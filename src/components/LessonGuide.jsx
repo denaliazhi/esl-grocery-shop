@@ -31,22 +31,24 @@ export default function LessonGuide({ tabs, transcript }) {
   return (
     <>
       <div className="lesson-guide">
-        <ul className="tab-nav">
-          {tabNames.map((name) => (
-            <li
-              key={name}
-              className={name === selected ? "tab-selected" : null}
-              onClick={() => handleSelect(name)}
-            >
-              <img src={getImagePath("icons/", `${name} icon`)} />
-              <p>{capitalize(name)}</p>
-              {/* A span creates the sliding tab effect */}
-              <span
-                style={name === selected ? { animationName: slide } : null}
-              ></span>
-            </li>
-          ))}
-        </ul>
+        <nav aria-label="Lesson guide navigation">
+          <ul className="tab-nav">
+            {tabNames.map((name) => (
+              <li
+                key={name}
+                className={name === selected ? "tab-selected" : null}
+                onClick={() => handleSelect(name)}
+              >
+                <img src={getImagePath("icons/", `${name} icon`)} />
+                <p>{capitalize(name)}</p>
+                {/* A span creates the sliding tab effect */}
+                <span
+                  style={name === selected ? { animationName: slide } : null}
+                ></span>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <div
           className="tab-contents"
           style={index === 0 ? { borderTopLeftRadius: 0 } : null}

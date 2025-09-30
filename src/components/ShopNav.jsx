@@ -7,7 +7,10 @@ import { Link } from "react-router";
 
 export default function ShopNav({ options, selected, animate }) {
   return (
-    <nav className={`shop-nav ${animate ? animate : ""}`}>
+    <nav
+      aria-label="Shop navigation"
+      className={`shop-nav ${animate ? animate : ""}`}
+    >
       <ul>
         {options.map((option) => {
           return (

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">80.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/30</span>
+                <span class='fraction'>25/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">80.64% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/30</span>
+                <span class='fraction'>25/31</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -103,86 +103,89 @@
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
 <a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * This component displays content in a
  * linear click-through format.
  */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { getImagePath } from "../utils";
 import NarrationBar from "./NarrationBar";
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export default function StoryMode({ setting, script, next, transcribe }) {</span></span>
-<span class="cstat-no" title="statement not covered" >  const navigate = useNavigate();</span>
+export default function StoryMode({ setting, script, next, transcribe }) {
+  const navigate = useNavigate();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  const [lineIndex, setLineIndex] = useState(0);</span>
-<span class="cstat-no" title="statement not covered" >  let line = script[lineIndex];</span>
+  const [lineIndex, setLineIndex] = useState(0);
+  let line = script[lineIndex];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    transcribe(line);</span>
-<span class="cstat-no" title="statement not covered" >  }, [lineIndex]);</span>
+  useEffect(() =&gt; {
+    transcribe(line);
+  }, [lineIndex]);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  function handleClick() {</span>
+<span class="fstat-no" title="function not covered" >  function handleClick() {</span>
 <span class="cstat-no" title="statement not covered" >    if (lineIndex !== script.length - 1) {</span>
 <span class="cstat-no" title="statement not covered" >      setLineIndex(lineIndex + 1);</span>
 <span class="cstat-no" title="statement not covered" >    } else {</span>
 <span class="cstat-no" title="statement not covered" >      navigate("/" + next);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;div</span>
-<span class="cstat-no" title="statement not covered" >      className="viewer"</span>
-<span class="cstat-no" title="statement not covered" >      style={{</span>
-<span class="cstat-no" title="statement not covered" >        backgroundImage: `url(backgrounds/${setting}.png)`,</span>
-<span class="cstat-no" title="statement not covered" >      }}</span>
+  return (
+    &lt;main
+      className="viewer"
+      style={{
+        backgroundImage: `url(${getImagePath("backgrounds", setting)})`,
+      }}
     &gt;
-<span class="cstat-no" title="statement not covered" >      &lt;NarrationBar</span>
-<span class="cstat-no" title="statement not covered" >        text={line}</span>
-<span class="cstat-no" title="statement not covered" >        isClickable={true}</span>
-<span class="cstat-no" title="statement not covered" >        handleClick={handleClick}</span>
-<span class="cstat-no" title="statement not covered" >      &gt;&lt;/NarrationBar&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
+      &lt;NarrationBar
+        text={line}
+        isClickable={true}
+        handleClick={handleClick}
+      &gt;&lt;/NarrationBar&gt;
+    &lt;/main&gt;
   );
-<span class="cstat-no" title="statement not covered" >}</span>
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -190,7 +193,7 @@ import NarrationBar from "./NarrationBar";
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-29T19:39:39.499Z
+                at 2025-09-30T02:03:20.375Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
